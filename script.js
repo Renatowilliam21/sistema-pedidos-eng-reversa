@@ -7,10 +7,15 @@ class Produto {
 
 class Produtos {
   static criar(nomeProduto) {
-    if (nomeProduto == "pastel") return new Produto("pastel", 5)
-    else if (nomeProduto == "caldo") return new Produto("caldo", 7)
-    else if (nomeProduto == "refrigerante") return new Produto("refrigerante", 4)
-    else if (nomeProduto == "suco") return new Produto("suco", 6)
+    const precos = {
+      "pastel": 5,
+      "caldo": 7,
+      "refrigerante": 4,
+      "suco": 6
+    };
+    if (precos[nomeProduto]) {
+      return new Produto(nomeProduto, precos[nomeProduto]);
+    }
   }
 }
 
@@ -27,7 +32,7 @@ class Carrinho {
   }
   adicionarItem(nomeProduto, qtd) {
     const produto = Produtos.criar(nomeProduto)
-    const subtotal = produto.preco * qtd;
+    const subtotal = produto.preco * qtd
 
     for(let i = 0; i < this.itens.length; i++) {
       if(this.itens[i].produto == produto.nome) {
@@ -42,20 +47,30 @@ class Carrinho {
       produto: produto.nome,
       qtd: Number(qtd),
       subtotal: subtotal
-    });
+    })
 
-    this.calcularTotal(); // Centraliza o cálculo
-    }
+    this.calcularTotal() // Centraliza o cálculo
+  }
 
   limparTudo() {
-    this.itens = [];
-    this.total = 0;
+    this.itens = []
+    this.total = 0
     atualizarLista()
   }
   
-  removerUltimo() {
-    this.itens.pop();
-    this.calcularTotal();
+  removerItemEspecifico(nomeProduto) {
+    // 1. Encontra a posição (index) do item na lista
+    const index = this.itens.findIndex(item => item.produto === nomeProduto)
+
+    // 2. Se encontrou (index diferente de -1), remove o item
+    if (index !== -1) {
+      // O splice remove itens do array. 
+      // O primeiro número é a posição, o segundo é quantos itens remover (1).
+      this.itens.splice(index, 1) 
+      
+      // 3. Recalcula o total do carrinho agora que o item sumiu
+      this.calcularTotal() 
+    }
   }
   
   calcularTotal() {
@@ -65,77 +80,83 @@ class Carrinho {
 
   salvarTotal() {
     // duplicação de responsabilidade
-    localStorage.setItem("total", total);
+    localStorage.setItem("total", this.total)
   }
 
   calcularTotalFinal() {
-    let desconto = 0;
+    let desconto = 0
     if (this.total > 100) {
-      desconto = this.total * 0.2;
+      desconto = this.total * 0.2
     } else if (this.total > 50) {
-      desconto = this.total * 0.1;
+      desconto = this.total * 0.1
     }
 
-    let taxa = this.total * 0.05;
-    return this.total - desconto + taxa;
+    let taxa = this.total * 0.05
+    return this.total - desconto + taxa
   }
 }
   const carrinho = new Carrinho()
 
+  // PARTE INTEGRADA A INTERAÇÃO COM O USUÁRIO
+
   function adicionar() {
-    let produto = document.getElementById("produto").value;
-    let qtd = Number(document.getElementById("qtd").value);
+    let produto = document.getElementById("produto").value
+    let qtd = Number(document.getElementById("qtd").value)
 
     if (qtd === "" || qtd <= 0) {
-      alert("Quantidade inválida");
-      return; // Interrompe a função aqui, evitando erros no carrinho
+      alert("Quantidade inválida")
+      return
     }
 
-    carrinho.adicionarItem(produto, qtd)
+    carrinho.adicionarItem(produto, qtd)   
     
-    atualizarLista();
+    atualizarLista()
   }
 
   function atualizarLista() {
-    let lista = document.getElementById("lista");
-    lista.innerHTML = "";
+    let lista = document.getElementById("lista")
+    lista.innerHTML = ""
 
-    // Lê os dados do Singleton em vez de variáveis globais perdidas
     for (let i = 0; i < carrinho.itens.length; i++) {
-      let item = carrinho.itens[i];
-      let li = document.createElement("li");
-      li.innerHTML = `${item.produto} | Qtd: ${item.qtd} | R$ ${item.subtotal}`;
-      lista.appendChild(li);
+      let item = carrinho.itens[i]
+      let li = document.createElement("li")
+      li.innerHTML = `${item.produto} | Qtd: ${item.qtd} | R$ ${item.subtotal} <button onclick="remover('${item.produto}')" class = "remover">remover</button>`
+      lista.appendChild(li)
     }
 
-    document.getElementById("total").innerText = carrinho.total;
-    document.getElementById("limparTudo").style.display = "flex"
+    document.getElementById("total").innerText = carrinho.total
+    document.getElementById("remover").style.display = "flex"
     document.getElementById("lista1").style.display = "block"
   } 
   
   function finalizar() {
-    let totalFinal = carrinho.calcularTotalFinal();
+    let totalFinal = carrinho.calcularTotalFinal()
   
-    alert("Total final: " + totalFinal);
-    localStorage.setItem("ultimoPedido", totalFinal);
+    alert("Total final: " + totalFinal)
+    localStorage.setItem("ultimoPedido", totalFinal)
 
-    carrinho.limparTudo();
-    atualizarLista();
-  }
-  /*
-    FUNÇÃO RESPONSAVEL POR LIMPAR TODO O CARRINHO
-    PODE PARECER UMA REPETIÇÃO DE OUTRO OBJETO ACIMA PORÉM ESTE SERVE PARA RECEBER O INPUT DO BUTTON DO HTML 
-  */
-  function limparTudo() { 
-    carrinho.limparTudo();
-    atualizarLista();
-    document.getElementById("limparTudo").style.display = "none"
+    carrinho.limparTudo()
+    atualizarLista()
+    document.getElementById("remover").style.display = "none"
     document.getElementById("lista1").style.display = "none"
   }
 
-  function removerUltimo() {
-    carrinho.removerUltimo();
-    atualizarLista();
+  function limparTudo() { 
+    carrinho.limparTudo()
+    atualizarLista()
+    document.getElementById("remover").style.display = "none"
+    document.getElementById("lista1").style.display = "none"
   }
- 
+
+  function remover(produto) {
+    carrinho.removerItemEspecifico(produto)
+  
+    atualizarLista() 
+  
+    if (carrinho.itens.length === 0) {
+      document.getElementById("remover").style.display = "none"
+      document.getElementById("lista1").style.display = "none"
+    }
+  }
+
 
