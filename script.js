@@ -49,7 +49,7 @@ class Carrinho {
       subtotal: subtotal
     })
 
-    this.calcularTotal() // Centraliza o cálculo
+    this.calcularTotal() 
   }
 
   limparTudo() {
@@ -59,16 +59,10 @@ class Carrinho {
   }
   
   removerItemEspecifico(nomeProduto) {
-    // 1. Encontra a posição (index) do item na lista
     const index = this.itens.findIndex(item => item.produto === nomeProduto)
 
-    // 2. Se encontrou (index diferente de -1), remove o item
     if (index !== -1) {
-      // O splice remove itens do array. 
-      // O primeiro número é a posição, o segundo é quantos itens remover (1).
       this.itens.splice(index, 1) 
-      
-      // 3. Recalcula o total do carrinho agora que o item sumiu
       this.calcularTotal() 
     }
   }
@@ -145,7 +139,7 @@ class Carrinho {
     carrinho.limparTudo()
     atualizarLista()
     document.getElementById("remover").style.display = "none"
-    document.getElementById("lista1").style.display = "none"
+    document.getElementById("lista1").style.display = "none"    
   }
 
   function remover(produto) {
