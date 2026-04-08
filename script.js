@@ -108,9 +108,9 @@ class Carrinho {
       lista.appendChild(li);
     }
 
-  document.getElementById("total").innerText = carrinho.total;
-  document.getElementById("limparTudo").style.display = "flex"
-  document.getElementById("lista1").style.display = "block"
+    document.getElementById("total").innerText = carrinho.total;
+    document.getElementById("limparTudo").style.display = "flex"
+    document.getElementById("lista1").style.display = "block"
   } 
   
   function finalizar() {
