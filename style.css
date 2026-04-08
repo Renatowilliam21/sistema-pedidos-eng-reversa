@@ -33,13 +33,50 @@ button:hover {
   background: #218838;
 }
 
+#lista1 {
+  display: none;
+}
+
+#lista {
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
 .lista ul {
   list-style: none;
   padding: 0;
+}
+
+.lista button {
+  display: flex;
+  justify-self: right;
+  background-color: red;
+}
+
+.lista button:hover {
+  background-color: rgb(200, 0, 0);
 }
 
 .lista li {
   background: #eee;
   margin: 5px 0;
   padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#remover {
+  display: none;
+  justify-content: space-evenly;
+}
+
+#remover button {
+  background-color: red;
+}
+
+
+#remover button:hover {
+  background-color: rgb(200, 0, 0);
 }
