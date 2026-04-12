@@ -1,15 +1,16 @@
+// ================================
+// CAMADA DE DADOS
+// ================================
 
-// CAMADA DE DADOS 
-
-class Item {
-  constructor(produto, qtd, preco) {
+class ItemPedido {
+  constructor(produto, quantidade, precoUnitario) {
     this.produto = produto;
-    this.qtd = qtd;
-    this.preco = preco;
+    this.quantidade = quantidade;
+    this.precoUnitario = precoUnitario;
   }
 
   calcularSubtotal() {
-    return this.qtd * this.preco;
+    return this.quantidade * this.precoUnitario;
   }
 }
 
@@ -22,23 +23,12 @@ class Pedido {
     this.itens.push(item);
   }
 
-  calcularTotal() {
-    return this.itens.reduce((total, item) => {
-      return total + item.calcularSubtotal();
-    }, 0);
+  obterItens() {
+    return [...this.itens];
   }
 
-  calcularResumo() {
-    const total = this.calcularTotal();
-
-    let desconto = 0;
-    if (total > 100) desconto = total * 0.2;
-    else if (total > 50) desconto = total * 0.1;
-
-    const taxa = total * 0.05;
-    const totalFinal = total - desconto + taxa;
-
-    return { total, desconto, taxa, totalFinal };
+  calcularSubtotal() {
+    return this.itens.reduce((acumulado, item) => acumulado + item.calcularSubtotal(), 0);
   }
 
   limpar() {
@@ -46,177 +36,186 @@ class Pedido {
   }
 }
 
+class CatalogoProdutosSingleton {
+  constructor() {
+    if (CatalogoProdutosSingleton.instancia) {
+      return CatalogoProdutosSingleton.instancia;
+    }
 
-// CAMADA DE SERVIÇO
+    this.produtos = {
+      pastel: 5,
+      caldo: 7,
+      refrigerante: 4,
+      suco: 6
+    };
 
-
-const produtos = {
-  pastel: 5,
-  caldo: 7,
-  refrigerante: 4,
-  suco: 6
-};
-
-function obterPreco(produto) {
-  return produtos[produto] || 0;
-}
-
-
-// CAMADA DE INTERFACE (DOM)
-
-
-const pedido = new Pedido();
-
-function adicionar() {
-  const produto = document.getElementById("produto").value;
-  const qtd = parseInt(document.getElementById("qtd").value);
-
-  if (!qtd || qtd <= 0) {
-    alert("Quantidade inválida");
-    return;
+    CatalogoProdutosSingleton.instancia = this;
   }
 
-  const preco = obterPreco(produto);
-  const item = new Item(produto, qtd, preco);
-
-  pedido.adicionarItem(item);
-  atualizarLista();
+  obterPreco(produto) {
+    return this.produtos[produto] || 0;
+  }
 }
 
-function atualizarLista() {
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
+class PersistenciaPedidosSingleton {
+  constructor() {
+    if (PersistenciaPedidosSingleton.instancia) {
+      return PersistenciaPedidosSingleton.instancia;
+    }
 
-  pedido.itens.forEach(item => {
-    const li = document.createElement("li");
-    li.innerText = `${item.produto} | Qtd: ${item.qtd} | R$ ${item.calcularSubtotal()}`;
-    lista.appendChild(li);
-  });
+    PersistenciaPedidosSingleton.instancia = this;
+  }
 
-  const resumo = pedido.calcularResumo();
-
-  document.getElementById("total").innerText = resumo.total;
+  salvarUltimoPedido(valor) {
+    localStorage.setItem("ultimoPedido", valor.toFixed(2));
+  }
 }
 
-function finalizar() {
-  const resumo = pedido.calcularResumo();
+// ================================
+// FACTORY
+// ================================
 
-  alert(
-    `Subtotal: ${resumo.total}\n` +
-    `Desconto: ${resumo.desconto}\n` +
-    `Taxa: ${resumo.taxa}\n` +
-    `Total Final: ${resumo.totalFinal}`
-  );
+class EntidadeFactory {
+  static criarPedido() {
+    return new Pedido();
+  }
 
-  localStorage.setItem("ultimoPedido", resumo.totalFinal);
-
-  limparTudo();
+  static criarItem(produto, quantidade, precoUnitario) {
+    return new ItemPedido(produto, quantidade, precoUnitario);
+  }
 }
 
-function limparTudo() {
-  pedido.limpar();
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
+// ================================
+// CAMADA DE NEGÓCIO
+// ================================
+
+class PedidoService {
+  constructor(catalogoProdutos, persistenciaPedidos) {
+    this.catalogoProdutos = catalogoProdutos;
+    this.persistenciaPedidos = persistenciaPedidos;
+  }
+
+  adicionarItemAoPedido(pedido, produto, quantidade) {
+    const preco = this.catalogoProdutos.obterPreco(produto);
+    const item = EntidadeFactory.criarItem(produto, quantidade, preco);
+    pedido.adicionarItem(item);
+  }
+
+  gerarResumo(pedido) {
+    const subtotal = pedido.calcularSubtotal();
+
+    let desconto = 0;
+    if (subtotal > 100) {
+      desconto = subtotal * 0.2;
+    } else if (subtotal > 50) {
+      desconto = subtotal * 0.1;
+    }
+
+    const taxa = subtotal * 0.05;
+    const totalFinal = subtotal - desconto + taxa;
+
+    return { subtotal, desconto, taxa, totalFinal };
+  }
+
+  finalizarPedido(pedido) {
+    const resumo = this.gerarResumo(pedido);
+    this.persistenciaPedidos.salvarUltimoPedido(resumo.totalFinal);
+    pedido.limpar();
+    return resumo;
+  }
 }
 
+// ================================
+// CONTROLLER (Interface <-> Negócio)
+// ================================
 
-//SISTEMA ANTIGO
-// let itens = [];
-// let total = 0; //variáveis globais que são usadas ao longo de todo o código
+class PedidoController {
+  constructor() {
+    this.pedido = EntidadeFactory.criarPedido();
+    this.service = new PedidoService(
+      new CatalogoProdutosSingleton(),
+      new PersistenciaPedidosSingleton()
+    );
 
-// function adicionar() {
-//   let produto = document.getElementById("produto").value; //dependencia da integridade dos ids do html 
-//   let qtd = document.getElementById("qtd").value;
+    this.elementos = {
+      produto: document.getElementById("produto"),
+      quantidade: document.getElementById("qtd"),
+      lista: document.getElementById("lista"),
+      subtotal: document.getElementById("subtotal"),
+      desconto: document.getElementById("desconto"),
+      taxa: document.getElementById("taxa"),
+      totalFinal: document.getElementById("total-final"),
+      btnAdicionar: document.getElementById("btn-adicionar"),
+      btnFinalizar: document.getElementById("btn-finalizar")
+    };
+  }
 
-//   if (qtd == "" || qtd <= 0) {
-//     alert("Quantidade inválida"); //validação
-//   }
+  iniciar() {
+    this.elementos.btnAdicionar.addEventListener("click", () => this.adicionarItem());
+    this.elementos.btnFinalizar.addEventListener("click", () => this.finalizarPedido());
+    this.renderizar();
+  }
 
-//   let preco = 0;
+  adicionarItem() {
+    const produto = this.elementos.produto.value;
+    const quantidade = Number.parseInt(this.elementos.quantidade.value, 10);
 
-//   if (produto == "pastel") preco = 5;
-//   if (produto == "caldo") preco = 7;
-//   if (produto == "refrigerante") preco = 4;
-//   if (produto == "suco") preco = 6; // verificação
+    if (!Number.isInteger(quantidade) || quantidade <= 0) {
+      alert("Quantidade inválida");
+      return;
+    }
 
-//   let subtotal = preco * qtd; // cálculo
+    this.service.adicionarItemAoPedido(this.pedido, produto, quantidade);
+    this.elementos.quantidade.value = "";
+    this.renderizar();
+  }
 
-//   itens.push({
-//     produto: produto,
-//     qtd: qtd,
-//     subtotal: subtotal //manipulação de dados
-//   });
+  finalizarPedido() {
+    const resumo = this.service.gerarResumo(this.pedido);
 
-//   atualizarLista(); // atualização // dependência de outra função
-// }
+    if (this.pedido.obterItens().length === 0) {
+      alert("Adicione ao menos um item antes de finalizar o pedido.");
+      return;
+    }
 
-// function atualizarLista() {
-//   let lista = document.getElementById("lista");
-//   lista.innerHTML = "";
+    alert(
+      `Subtotal: R$ ${this.formatarMoeda(resumo.subtotal)}\n` +
+      `Desconto: R$ ${this.formatarMoeda(resumo.desconto)}\n` +
+      `Taxa: R$ ${this.formatarMoeda(resumo.taxa)}\n` +
+      `Total Final: R$ ${this.formatarMoeda(resumo.totalFinal)}`
+    );
 
-//   total = 0;
+    this.service.finalizarPedido(this.pedido);
+    this.renderizar();
+  }
 
-//   for (let i = 0; i < itens.length; i++) {
-//     let item = itens[i];
+  renderizar() {
+    this.renderizarItens();
+    this.renderizarResumo();
+  }
 
-//     let li = document.createElement("li");
-//     li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal; //exibição
+  renderizarItens() {
+    this.elementos.lista.innerHTML = "";
 
-//     lista.appendChild(li);
+    this.pedido.obterItens().forEach((item) => {
+      const li = document.createElement("li");
+      li.innerText = `${item.produto} | Qtd: ${item.quantidade} | R$ ${this.formatarMoeda(item.calcularSubtotal())}`;
+      this.elementos.lista.appendChild(li);
+    });
+  }
 
-//     total = total + item.subtotal; // cáculo do total //duplicado la na função calcularTotal()
-//   }
+  renderizarResumo() {
+    const resumo = this.service.gerarResumo(this.pedido);
+    this.elementos.subtotal.innerText = this.formatarMoeda(resumo.subtotal);
+    this.elementos.desconto.innerText = this.formatarMoeda(resumo.desconto);
+    this.elementos.taxa.innerText = this.formatarMoeda(resumo.taxa);
+    this.elementos.totalFinal.innerText = this.formatarMoeda(resumo.totalFinal);
+  }
 
-//   document.getElementById("total").innerText = total; //exibição
+  formatarMoeda(valor) {
+    return valor.toFixed(2).replace(".", ",");
+  }
+}
 
-//   salvarTotal(); // salva dados
-// }
-
-// function salvarTotal() { //acontece novamente dentro da função finalizar
-//   // duplicação de responsabilidade
-//   localStorage.setItem("total", total);
-// }
-
-// function finalizar() {
-//   let desconto = 0;
-
-//   if (total > 100) {
-//     desconto = total * 0.2;
-//   } else if (total > 50) {
-//     desconto = total * 0.1; //tratamento de dados
-//   }
-
-//   let taxa = total * 0.05; //calculo de taxa
-
-//   let totalFinal = total - desconto + taxa; //calculo de total final com desconto e taxa
-
-//   alert("Total final: " + totalFinal); //exibição de dados
-
-//   localStorage.setItem("ultimoPedido", totalFinal); //atualização de dados //duplicado de salvarTotal()
-
-//   limparTudo();
-// }
-
-// function limparTudo() {
-//   itens = [];
-//   total = 0;
-
-//   document.getElementById("lista").innerHTML = "";
-//   document.getElementById("total").innerText = 0;
-// }
-
-// function removerUltimo() {
-//   itens.pop();
-//   atualizarLista();
-// }
-
-// // função duplicada de cálculo (problema proposital)
-// function calcularTotal() { //novamente na função atulizarLista()
-//   let soma = 0;
-
-//   for (let i = 0; i < itens.length; i++) {
-//     soma += itens[i].subtotal;
-//   }
-
-//   return soma;
-// }
+const controller = new PedidoController();
+controller.iniciar();
