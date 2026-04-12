@@ -1,5 +1,11 @@
 let itens = [];
 let total = 0;
+const  precos = {
+  pastel: 5,
+  caldo: 7,
+  refrigerante: 4,
+  suco: 6
+};
 
 function adicionar() {
   let produto = document.getElementById("produto").value;
@@ -10,12 +16,7 @@ function adicionar() {
     return;
   }
 
-  let preco = 0;
-
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
+  let preco = precos[produto];
 
   let subtotal = preco * qtd;
 
