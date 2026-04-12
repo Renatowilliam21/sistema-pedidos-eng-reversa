@@ -1,5 +1,13 @@
+class Produto{
+  constructor(nome, preco) {
+    this.nome = nome;
+    this.preco = preco;
+  }
+}
+
 let itens = [];
 let total = 0;
+
 const  precos = {
   pastel: 5,
   caldo: 7,
@@ -17,11 +25,12 @@ function adicionar() {
   }
 
   let preco = precos[produto];
+  let produtoObj = new Produto(produto, preco);
 
-  let subtotal = preco * qtd;
+  let subtotal = produtoObj.preco * qtd;
 
   itens.push({
-    produto: produto,
+    produto: produtoObj,
     qtd: qtd,
     subtotal: subtotal
   });
@@ -37,7 +46,7 @@ function atualizarLista() {
   let item = itens[i];
 
   let li = document.createElement("li");
-  li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
+  li.innerHTML = item.produto.nome + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
 
   lista.appendChild(li);
 }
