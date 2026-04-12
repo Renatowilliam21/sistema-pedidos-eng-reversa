@@ -62,12 +62,13 @@ class Pedido {
 
 const pedidoInstance = new PedidoSingleton();
 let pedido = pedidoInstance.getPedido();
+let total  = 0;
 
 
 
 function adicionar() {
   let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
+  let qtd = parseInt(document.getElementById("qtd").value);
 
   if (qtd == "" || qtd <= 0) {
     alert("Quantidade inválida");
@@ -87,7 +88,7 @@ function atualizarLista() {
   lista.innerHTML = "";
 
   for (let i = 0; i < pedido.itens.length; i++) {
-  let item = pedidos.itens[i];
+  let item = pedido.itens[i];
   
   let li = document.createElement("li");
   li.innerHTML = item.produto.nome + " | Qtd: " + item.qtd + " | R$ " + item.getSubtotal();
@@ -128,7 +129,7 @@ function finalizar() {
 }
 
 function limparTudo() {
-  itens = [];
+  pedido.itens = [];
   total = 0;
 
   document.getElementById("lista").innerHTML = "";
@@ -136,7 +137,7 @@ function limparTudo() {
 }
 
 function removerUltimo() {
-  itens.pop();
+  pedido.itens.pop();
   atualizarLista();
 }
 
