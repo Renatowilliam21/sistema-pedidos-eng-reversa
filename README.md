@@ -12,64 +12,46 @@ Arquitetura de Sistemas
 
 Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
 
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
+A versão atual foi refatorada com foco em:
+
+- organização em camadas (Interface, Negócio e Dados)
+- separação de responsabilidades via Controller
+- uso de classes para entidades de domínio
+- aplicação de padrões de projeto Factory e Singleton
+- transparência de cálculo (subtotal, desconto, taxa e total final)
 
 ---
 
-## Objetivo da Atividade
+## Arquitetura aplicada
 
-O objetivo é aplicar conceitos de:
+### 1) Camada de Interface (DOM)
+Responsável por capturar eventos da tela e atualizar a visualização.
 
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
+### 2) Camada de Negócio
+Responsável pelas regras de cálculo de desconto, taxa e finalização de pedidos.
 
----
-
-## Desafio
-
-Você deverá:
-
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
+### 3) Camada de Dados
+Responsável pelas entidades (`Pedido`, `ItemPedido`), catálogo de preços e persistência.
 
 ---
 
-## O que analisar
-
-Durante a análise, identifique problemas relacionados a:
-
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
-
----
-
-## Implementações obrigatórias
-
-Você deve aplicar no sistema:
+## Padrões de Projeto aplicados
 
 ### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
+A classe `EntidadeFactory` centraliza a criação de objetos (`Pedido` e `ItemPedido`).
 
 ### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
+Foram aplicados singletons para:
+
+- `CatalogoProdutosSingleton` (fonte única de preços)
+- `PersistenciaPedidosSingleton` (instância única de acesso ao `localStorage`)
 
 ---
 
 ## Como executar o projeto
 
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
+1. Baixe ou clone o repositório
+2. Abra o arquivo `index.html` no navegador
 
 ---
 
@@ -77,3 +59,4 @@ Utilizar para garantir uma única instância (ex: controle do pedido ou persist�
 
 ```bash
 git clone LINK_DO_REPOSITORIO
+```
