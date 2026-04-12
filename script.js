@@ -1,99 +1,221 @@
-let itens = [];
-let total = 0;
+// ================================
+// CAMADA DE DADOS
+// ================================
 
-function adicionar() {
-  let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
-
-  if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
+class ItemPedido {
+  constructor(produto, quantidade, precoUnitario) {
+    this.produto = produto;
+    this.quantidade = quantidade;
+    this.precoUnitario = precoUnitario;
   }
 
-  let preco = 0;
-
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
-
-  let subtotal = preco * qtd;
-
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
-
-  atualizarLista();
+  calcularSubtotal() {
+    return this.quantidade * this.precoUnitario;
+  }
 }
 
-function atualizarLista() {
-  let lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  total = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
-
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
-    lista.appendChild(li);
-
-    total = total + item.subtotal;
+class Pedido {
+  constructor() {
+    this.itens = [];
   }
 
-  document.getElementById("total").innerText = total;
-
-  salvarTotal();
-}
-
-function salvarTotal() {
-  // duplicação de responsabilidade
-  localStorage.setItem("total", total);
-}
-
-function finalizar() {
-  let desconto = 0;
-
-  if (total > 100) {
-    desconto = total * 0.2;
-  } else if (total > 50) {
-    desconto = total * 0.1;
+  adicionarItem(item) {
+    this.itens.push(item);
   }
 
-  let taxa = total * 0.05;
-
-  let totalFinal = total - desconto + taxa;
-
-  alert("Total final: " + totalFinal);
-
-  localStorage.setItem("ultimoPedido", totalFinal);
-
-  limparTudo();
-}
-
-function limparTudo() {
-  itens = [];
-  total = 0;
-
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
-}
-
-function removerUltimo() {
-  itens.pop();
-  atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
+  obterItens() {
+    return [...this.itens];
   }
 
-  return soma;
+  calcularSubtotal() {
+    return this.itens.reduce((acumulado, item) => acumulado + item.calcularSubtotal(), 0);
+  }
+
+  limpar() {
+    this.itens = [];
+  }
 }
+
+class CatalogoProdutosSingleton {
+  constructor() {
+    if (CatalogoProdutosSingleton.instancia) {
+      return CatalogoProdutosSingleton.instancia;
+    }
+
+    this.produtos = {
+      pastel: 5,
+      caldo: 7,
+      refrigerante: 4,
+      suco: 6
+    };
+
+    CatalogoProdutosSingleton.instancia = this;
+  }
+
+  obterPreco(produto) {
+    return this.produtos[produto] || 0;
+  }
+}
+
+class PersistenciaPedidosSingleton {
+  constructor() {
+    if (PersistenciaPedidosSingleton.instancia) {
+      return PersistenciaPedidosSingleton.instancia;
+    }
+
+    PersistenciaPedidosSingleton.instancia = this;
+  }
+
+  salvarUltimoPedido(valor) {
+    localStorage.setItem("ultimoPedido", valor.toFixed(2));
+  }
+}
+
+// ================================
+// FACTORY
+// ================================
+
+class EntidadeFactory {
+  static criarPedido() {
+    return new Pedido();
+  }
+
+  static criarItem(produto, quantidade, precoUnitario) {
+    return new ItemPedido(produto, quantidade, precoUnitario);
+  }
+}
+
+// ================================
+// CAMADA DE NEGÓCIO
+// ================================
+
+class PedidoService {
+  constructor(catalogoProdutos, persistenciaPedidos) {
+    this.catalogoProdutos = catalogoProdutos;
+    this.persistenciaPedidos = persistenciaPedidos;
+  }
+
+  adicionarItemAoPedido(pedido, produto, quantidade) {
+    const preco = this.catalogoProdutos.obterPreco(produto);
+    const item = EntidadeFactory.criarItem(produto, quantidade, preco);
+    pedido.adicionarItem(item);
+  }
+
+  gerarResumo(pedido) {
+    const subtotal = pedido.calcularSubtotal();
+
+    let desconto = 0;
+    if (subtotal > 100) {
+      desconto = subtotal * 0.2;
+    } else if (subtotal > 50) {
+      desconto = subtotal * 0.1;
+    }
+
+    const taxa = subtotal * 0.05;
+    const totalFinal = subtotal - desconto + taxa;
+
+    return { subtotal, desconto, taxa, totalFinal };
+  }
+
+  finalizarPedido(pedido) {
+    const resumo = this.gerarResumo(pedido);
+    this.persistenciaPedidos.salvarUltimoPedido(resumo.totalFinal);
+    pedido.limpar();
+    return resumo;
+  }
+}
+
+// ================================
+// CONTROLLER (Interface <-> Negócio)
+// ================================
+
+class PedidoController {
+  constructor() {
+    this.pedido = EntidadeFactory.criarPedido();
+    this.service = new PedidoService(
+      new CatalogoProdutosSingleton(),
+      new PersistenciaPedidosSingleton()
+    );
+
+    this.elementos = {
+      produto: document.getElementById("produto"),
+      quantidade: document.getElementById("qtd"),
+      lista: document.getElementById("lista"),
+      subtotal: document.getElementById("subtotal"),
+      desconto: document.getElementById("desconto"),
+      taxa: document.getElementById("taxa"),
+      totalFinal: document.getElementById("total-final"),
+      btnAdicionar: document.getElementById("btn-adicionar"),
+      btnFinalizar: document.getElementById("btn-finalizar")
+    };
+  }
+
+  iniciar() {
+    this.elementos.btnAdicionar.addEventListener("click", () => this.adicionarItem());
+    this.elementos.btnFinalizar.addEventListener("click", () => this.finalizarPedido());
+    this.renderizar();
+  }
+
+  adicionarItem() {
+    const produto = this.elementos.produto.value;
+    const quantidade = Number.parseInt(this.elementos.quantidade.value, 10);
+
+    if (!Number.isInteger(quantidade) || quantidade <= 0) {
+      alert("Quantidade inválida");
+      return;
+    }
+
+    this.service.adicionarItemAoPedido(this.pedido, produto, quantidade);
+    this.elementos.quantidade.value = "";
+    this.renderizar();
+  }
+
+  finalizarPedido() {
+    const resumo = this.service.gerarResumo(this.pedido);
+
+    if (this.pedido.obterItens().length === 0) {
+      alert("Adicione ao menos um item antes de finalizar o pedido.");
+      return;
+    }
+
+    alert(
+      `Subtotal: R$ ${this.formatarMoeda(resumo.subtotal)}\n` +
+      `Desconto: R$ ${this.formatarMoeda(resumo.desconto)}\n` +
+      `Taxa: R$ ${this.formatarMoeda(resumo.taxa)}\n` +
+      `Total Final: R$ ${this.formatarMoeda(resumo.totalFinal)}`
+    );
+
+    this.service.finalizarPedido(this.pedido);
+    this.renderizar();
+  }
+
+  renderizar() {
+    this.renderizarItens();
+    this.renderizarResumo();
+  }
+
+  renderizarItens() {
+    this.elementos.lista.innerHTML = "";
+
+    this.pedido.obterItens().forEach((item) => {
+      const li = document.createElement("li");
+      li.innerText = `${item.produto} | Qtd: ${item.quantidade} | R$ ${this.formatarMoeda(item.calcularSubtotal())}`;
+      this.elementos.lista.appendChild(li);
+    });
+  }
+
+  renderizarResumo() {
+    const resumo = this.service.gerarResumo(this.pedido);
+    this.elementos.subtotal.innerText = this.formatarMoeda(resumo.subtotal);
+    this.elementos.desconto.innerText = this.formatarMoeda(resumo.desconto);
+    this.elementos.taxa.innerText = this.formatarMoeda(resumo.taxa);
+    this.elementos.totalFinal.innerText = this.formatarMoeda(resumo.totalFinal);
+  }
+
+  formatarMoeda(valor) {
+    return valor.toFixed(2).replace(".", ",");
+  }
+}
+
+const controller = new PedidoController();
+controller.iniciar();
