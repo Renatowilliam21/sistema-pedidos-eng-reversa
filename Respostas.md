@@ -50,4 +50,4 @@
 
 ### Parte 6 – Propostas de Melhoria
 
-O código precisa passar por diversas melhorias. Primeiramente, é necessário refatorar as funções para torná-las mais específicas, visando aumentar a coesão e diminuir o acoplamento. Além disso, seria ideal aplicar um padrão arquitetural como Camadas, MVC ou Hexagonal para estruturar o projeto, melhorando a legibilidade e a organização. As variáveis devem ser renomeadas para nomes mais claros e coesos. Por fim, deve-se remover as aplicações redundantes e o "código morto" (funções não utilizadas).
+O código precisa passar por diversas melhorias. Primeiramente, é necessário refatorar as funções para torná-las mais específicas, visando aumentar a coesão e diminuir o acoplamento. Além disso, seria ideal aplicar um padrão arquitetural como Camadas, MVC ou Hexagonal para estruturar o projeto, melhorando a legibilidade e a organização. As variáveis devem ser renomeadas para nomes mais claros e coesos, também dever estar dentro de classes para que projeto possa ter uma fluidez melhor. Por fim, deve-se remover as aplicações redundantes e o "código morto" (funções não utilizadas).
