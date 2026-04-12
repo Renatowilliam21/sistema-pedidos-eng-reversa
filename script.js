@@ -1,3 +1,15 @@
+class ProdutoFactory {
+  static criarProduto(nome) {
+    const precos = {
+      pastel: 5,
+      caldo: 7,
+      refrigerante: 4,
+      suco: 6
+    };
+
+    return new Produto(nome, precos[nome]);
+  }
+}
 class Produto{
   constructor(nome, preco) {
     this.nome = nome;
@@ -36,12 +48,7 @@ class Pedido {
 
 let pedido = new Pedido();
 
-const  precos = {
-  pastel: 5,
-  caldo: 7,
-  refrigerante: 4,
-  suco: 6
-};
+
 
 function adicionar() {
   let produto = document.getElementById("produto").value;
@@ -52,8 +59,7 @@ function adicionar() {
     return;
   }
 
-  let preco = precos[produto];
-  let produtoObj = new Produto(produto, preco);
+  let produtoObj = ProdutoFactory.criarProduto(produto);
 
   let item = new ItemPedido(produtoObj, qtd);
   pedido.adicionarItem(item);
