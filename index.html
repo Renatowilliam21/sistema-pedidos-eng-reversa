@@ -18,10 +18,10 @@
       <option value="suco">Suco</option>
     </select>
 
-    <input type="number" id="qtd" placeholder="Quantidade">
+    <input type="number" id="qtd" placeholder="Quantidade" min="1">
 
-    <button onclick="adicionar()">Adicionar</button>
-    <button onclick="finalizar()">Finalizar Pedido</button>
+    <button id="btn-adicionar" type="button">Adicionar</button>
+    <button id="btn-finalizar" type="button">Finalizar Pedido</button>
   </div>
 
   <div class="lista">
@@ -29,8 +29,12 @@
     <ul id="lista"></ul>
   </div>
 
-  <div class="total">
-    <h2>Total: R$ <span id="total">0</span></h2>
+  <div class="resumo" aria-live="polite">
+    <h2>Resumo do Pedido</h2>
+    <p>Subtotal: R$ <span id="subtotal">0,00</span></p>
+    <p>Desconto: R$ <span id="desconto">0,00</span></p>
+    <p>Taxa: R$ <span id="taxa">0,00</span></p>
+    <p class="total-final">Total final: R$ <span id="total-final">0,00</span></p>
   </div>
 </div>
 
