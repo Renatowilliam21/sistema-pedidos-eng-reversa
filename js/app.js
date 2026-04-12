@@ -1,16 +1,5 @@
 const pedido = new Pedido();
 
-function obterPreco(produto) {
-  const precos = {
-    pastel: 5,
-    caldo: 7,
-    refrigerante: 4,
-    suco: 6
-  };
-
-  return precos[produto];
-}
-
 function adicionar() {
   const produto = document.getElementById("produto").value;
   const qtd = parseInt(document.getElementById("qtd").value);
@@ -20,8 +9,8 @@ function adicionar() {
     return;
   }
 
-  const preco = obterPreco(produto);
-  const subtotal = preco * qtd;
+    const produtoObj = ProdutoFactory.criarProduto(produto);
+    const subtotal = produtoObj.preco * qtd;
 
   pedido.adicionarItem({
     produto: produto,
