@@ -4,6 +4,16 @@ class Produto{
     this.preco = preco;
   }
 }
+class ItemPedido {
+  constructor(produto, qtd) {
+    this.produto = produto;
+    this.qtd = qtd;
+  }
+
+  getSubtotal() {
+    return this.produto.preco * this.qtd;
+  }
+}
 
 let itens = [];
 let total = 0;
@@ -27,13 +37,8 @@ function adicionar() {
   let preco = precos[produto];
   let produtoObj = new Produto(produto, preco);
 
-  let subtotal = produtoObj.preco * qtd;
-
-  itens.push({
-    produto: produtoObj,
-    qtd: qtd,
-    subtotal: subtotal
-  });
+  let item = new ItemPedido(produtoObj, qtd);
+  itens.push(item);
 
   atualizarLista();
 }
@@ -46,7 +51,7 @@ function atualizarLista() {
   let item = itens[i];
 
   let li = document.createElement("li");
-  li.innerHTML = item.produto.nome + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
+  li.innerHTML = item.produto.nome + " | Qtd: " + item.qtd + " | R$ " + item.getSubtotal();
 
   lista.appendChild(li);
 }
@@ -101,7 +106,7 @@ function calcularTotal() {
   let soma = 0;
 
   for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
+    soma += itens[i].getSubtotal();
   }
 
   return soma;
