@@ -41,7 +41,7 @@ function atualizarLista() {
 
     lista.appendChild(li);
 
-    total = total + item.subtotal; // cáculo do total
+    total = total + item.subtotal; // cáculo do total //duplicado la na função calcularTotal()
   }
 
   document.getElementById("total").innerText = total; //exibição
@@ -49,7 +49,7 @@ function atualizarLista() {
   salvarTotal(); // salva dados
 }
 
-function salvarTotal() {
+function salvarTotal() { //acontece novamente dentro da função finalizar
   // duplicação de responsabilidade
   localStorage.setItem("total", total);
 }
@@ -69,7 +69,7 @@ function finalizar() {
 
   alert("Total final: " + totalFinal); //exibição de dados
 
-  localStorage.setItem("ultimoPedido", totalFinal); //atualização de dados
+  localStorage.setItem("ultimoPedido", totalFinal); //atualização de dados //duplicado de salvarTotal()
 
   limparTudo();
 }
@@ -88,7 +88,7 @@ function removerUltimo() {
 }
 
 // função duplicada de cálculo (problema proposital)
-function calcularTotal() {
+function calcularTotal() { //novamente na função atulizarLista()
   let soma = 0;
 
   for (let i = 0; i < itens.length; i++) {
