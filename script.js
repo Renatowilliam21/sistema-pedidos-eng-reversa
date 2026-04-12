@@ -1,3 +1,17 @@
+class PedidoSingleton {
+  constructor() {
+    if (!PedidoSingleton.instance) {
+      this.pedido = new Pedido();
+      PedidoSingleton.instance = this;
+    }
+
+    return PedidoSingleton.instance;
+  }
+
+  getPedido() {
+    return this.pedido;
+  }
+}
 class ProdutoFactory {
   static criarProduto(nome) {
     const precos = {
@@ -46,7 +60,8 @@ class Pedido {
   }
 }
 
-let pedido = new Pedido();
+const pedidoInstance = new PedidoSingleton();
+let pedido = pedidoInstance.getPedido();
 
 
 
