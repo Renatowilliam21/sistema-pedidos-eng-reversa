@@ -57,7 +57,7 @@ let pedidoAtual = new Pedidos;
 
 
 function adicionarPedido(produto, qtd) {
-  let qtd = Number(qtd), novoItem, verificarValor;
+  let novoItem, verificarValor;
 
   if (qtd == "" || qtd <= 0) {
     alert("Quantidade inválida");
@@ -167,6 +167,10 @@ function clickFinalizarPedido() {
 }
 
 function clickRemoverUltimo() {
+  if (pedidoAtual.itens.length === 0) {
+    alert("Adicione itens ao pedido antes de remover.");
+    return;
+  }
   removerUltimo();
   atualizarTela();
 }
