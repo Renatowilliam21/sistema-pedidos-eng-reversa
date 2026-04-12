@@ -14,9 +14,27 @@ class ItemPedido {
     return this.produto.preco * this.qtd;
   }
 }
+class Pedido {
+  constructor() {
+    this.itens = [];
+  }
 
-let itens = [];
-let total = 0;
+  adicionarItem(item) {
+    this.itens.push(item);
+  }
+
+  calcularTotal() {
+    let total = 0;
+
+    for (let i = 0; i < this.itens.length; i++) {
+      total += this.itens[i].getSubtotal();
+    }
+
+    return total;
+  }
+}
+
+let pedido = new Pedido();
 
 const  precos = {
   pastel: 5,
@@ -38,7 +56,7 @@ function adicionar() {
   let produtoObj = new Produto(produto, preco);
 
   let item = new ItemPedido(produtoObj, qtd);
-  itens.push(item);
+  pedido.adicionarItem(item);
 
   atualizarLista();
 }
@@ -47,16 +65,16 @@ function atualizarLista() {
   let lista = document.getElementById("lista");
   lista.innerHTML = "";
 
-  for (let i = 0; i < itens.length; i++) {
-  let item = itens[i];
-
+  for (let i = 0; i < pedido.itens.length; i++) {
+  let item = pedidos.itens[i];
+  
   let li = document.createElement("li");
   li.innerHTML = item.produto.nome + " | Qtd: " + item.qtd + " | R$ " + item.getSubtotal();
 
   lista.appendChild(li);
 }
 
-total = calcularTotal();
+total = pedido.calcularTotal();
 
   document.getElementById("total").innerText = total;
 
@@ -103,11 +121,5 @@ function removerUltimo() {
 
 // função duplicada de cálculo (problema proposital)
 function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].getSubtotal();
-  }
-
-  return soma;
+  return pedido.calcularTotal();
 }
