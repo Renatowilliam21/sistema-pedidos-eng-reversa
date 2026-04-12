@@ -7,13 +7,41 @@ class ItemPedido {
     this.preco = Number(preco);
     this.subtotal = this.qtd * this.preco;
   }
+
+  static criarItem(produto, quantidadeDigitada) {
+    let qtd = Number(quantidadeDigitada);
+
+    if (!qtd || qtd <= 0) {
+      throw new Error("Quantidade inválida. Digite um número maior que zero.");
+    }
+
+    const tabelaPrecos = {
+      "pastel": 5, "caldo": 7, "refrigerante": 4, "suco": 6
+    };
+
+    let precoVigente = tabelaPrecos[produto.toLowerCase()] || 0;
+
+    if (precoVigente === 0) {
+      throw new Error("Produto inválido ou não cadastrado.");
+    }
+
+    return new ItemPedido(produto, qtd, precoVigente);
+  }
 }
+
+
 
 //Classe do pedido
 class Pedidos {
   constructor() {
+
+    if (Pedidos.instancia) {
+      return Pedidos.instancia;
+    }
     this.itens = [];
     this.total = 0;
+
+    Pedidos.instancia = this;
   }
 
   adicionarItem(novoItem) {
@@ -57,43 +85,16 @@ let pedidoAtual = new Pedidos;
 
 
 function adicionarPedido(produto, qtd) {
-  let novoItem, verificarValor;
+  try {
+    let novoItem = ItemPedido.criarItem(produto, qtd);
 
-  if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
-    return;
-  } else {
-
-
-    verificarValor = verificarPreco(produto);
-
-    if (verificarValor != 0) {
-      novoItem = new ItemPedido(produto, qtd, verificarValor);
-
-      pedidoAtual.adicionarItem(novoItem);
-
-      salvarPedido();
-    } else {
-      alert("Produto inválido ou não encontrado.");
-    }
-
+    pedidoAtual.adicionarItem(novoItem);
+    salvarPedido();
+  } catch (erro) {
+    alert(erro.message);
   }
 
 }
-
-function verificarPreco(produto) {
-  let preco = 0;
-
-  let tabelaPrecos = {
-    "pastel": 5,
-    "caldo": 7,
-    "refrigerante": 4,
-    "suco": 6
-  };
-
-  return tabelaPrecos[produto.toLowerCase()] || preco;
-}
-
 
 function finalizarPedido() {
   if (pedidoAtual.itens.length === 0) {
