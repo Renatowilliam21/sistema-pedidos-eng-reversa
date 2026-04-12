@@ -7,6 +7,7 @@ function adicionar() {
 
   if (qtd == "" || qtd <= 0) {
     alert("Quantidade inválida");
+    return;
   }
 
   let preco = 0;
