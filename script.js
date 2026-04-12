@@ -32,18 +32,16 @@ function atualizarLista() {
   let lista = document.getElementById("lista");
   lista.innerHTML = "";
 
-  total = 0;
-
   for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
+  let item = itens[i];
 
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
+  let li = document.createElement("li");
+  li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
 
-    lista.appendChild(li);
+  lista.appendChild(li);
+}
 
-    total = total + item.subtotal;
-  }
+total = calcularTotal();
 
   document.getElementById("total").innerText = total;
 
