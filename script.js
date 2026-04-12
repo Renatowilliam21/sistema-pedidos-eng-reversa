@@ -6,7 +6,7 @@ function adicionar() {
   let qtd = document.getElementById("qtd").value;
 
   if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
+    alert("Quantidade inválida"); //validação
   }
 
   let preco = 0;
@@ -14,17 +14,17 @@ function adicionar() {
   if (produto == "pastel") preco = 5;
   if (produto == "caldo") preco = 7;
   if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
+  if (produto == "suco") preco = 6; // verificação
 
-  let subtotal = preco * qtd;
+  let subtotal = preco * qtd; // cálculo
 
   itens.push({
     produto: produto,
     qtd: qtd,
-    subtotal: subtotal
+    subtotal: subtotal //manipulação de dados
   });
 
-  atualizarLista();
+  atualizarLista(); // atualização
 }
 
 function atualizarLista() {
@@ -37,16 +37,16 @@ function atualizarLista() {
     let item = itens[i];
 
     let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
+    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal; //exibição
 
     lista.appendChild(li);
 
-    total = total + item.subtotal;
+    total = total + item.subtotal; // cáculo do total
   }
 
-  document.getElementById("total").innerText = total;
+  document.getElementById("total").innerText = total; //exibição
 
-  salvarTotal();
+  salvarTotal(); // salva dados
 }
 
 function salvarTotal() {
@@ -60,16 +60,16 @@ function finalizar() {
   if (total > 100) {
     desconto = total * 0.2;
   } else if (total > 50) {
-    desconto = total * 0.1;
+    desconto = total * 0.1; //tratamento de dados
   }
 
-  let taxa = total * 0.05;
+  let taxa = total * 0.05; //calculo de taxa
 
-  let totalFinal = total - desconto + taxa;
+  let totalFinal = total - desconto + taxa; //calculo de total final com desconto e taxa
 
-  alert("Total final: " + totalFinal);
+  alert("Total final: " + totalFinal); //exibição de dados
 
-  localStorage.setItem("ultimoPedido", totalFinal);
+  localStorage.setItem("ultimoPedido", totalFinal); //atualização de dados
 
   limparTudo();
 }
