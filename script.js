@@ -1,8 +1,8 @@
 let itens = [];
-let total = 0;
+let total = 0; //variáveis globais que são usadas ao longo de todo o código
 
 function adicionar() {
-  let produto = document.getElementById("produto").value;
+  let produto = document.getElementById("produto").value; //dependencia da integridade dos ids do html 
   let qtd = document.getElementById("qtd").value;
 
   if (qtd == "" || qtd <= 0) {
@@ -24,7 +24,7 @@ function adicionar() {
     subtotal: subtotal //manipulação de dados
   });
 
-  atualizarLista(); // atualização
+  atualizarLista(); // atualização // dependência de outra função
 }
 
 function atualizarLista() {
