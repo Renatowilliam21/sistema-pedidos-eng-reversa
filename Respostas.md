@@ -37,7 +37,7 @@
 ### Parte 4 – Modelagem
 
 <p align="center">
-  <img src="trabalho_2_(UML).png" alt="Diagrama UML do Sistema" width="500">
+  <img src="trabalho_2_(UML).png" alt="Diagrama UML do Sistema">
 </p>
 
 ### Parte 5 – Análise de Problemas
@@ -59,11 +59,11 @@ Parte feita no código, foram feitas mudanças no script.js e index.html
 ### Parte 8 – Aplicação de Padões de Projeto
 
 * **Factory:** -
-Onde foi aplicado? Na classe "itemPedido". 
+Onde foi aplicado? Na classe `itemPedido()`. 
 
-Por que ele foi utilizado? O padrão Factory foi escolhido para centralizar e padronizar a criação de objetos no sistema. Como a classe "ItemPedido" é instanciada com frequência e exige validações específicas, a Factory simplifica esse processo. Isso garante que o sistema possua um ponto único de acesso para montar esses objetos de forma consistente, eliminando a dependência de funções externas desnecessárias e reduzindo a complexidade no código cliente.
+Por que ele foi utilizado? O padrão Factory foi escolhido para centralizar e padronizar a criação de objetos no sistema. Como a classe `itemPedido()` é instanciada com frequência e exige validações específicas, a Factory simplifica esse processo. Isso garante que o sistema possua um ponto único de acesso para montar esses objetos de forma consistente, eliminando a dependência de funções externas desnecessárias e reduzindo a complexidade no código cliente.
 
 * **Singleton:** -
-Onde foi aplicado? Na classe "Pedidos".
+Onde foi aplicado? Na classe `Pedidos()`.
 
-A classe "Pedidos" gerencia uma das partes mais importante do sistema. O Singleton foi aplicado para evitar falhas como a existência de múltiplas instâncias na memória, problemas de sincronização, desperdício de recursos ou conflitos de dados. Esse padrão garante que exista apenas uma instância única e global da classe, protegendo a integridade das informações e permitindo um controle centralizado e seguro sobre o fluxo de pedidos.
+A classe `Pedidos()` gerencia uma das partes mais importante do sistema. O Singleton foi aplicado para evitar falhas como a existência de múltiplas instâncias na memória, problemas de sincronização, desperdício de recursos ou conflitos de dados. Esse padrão garante que exista apenas uma instância única e global da classe, protegendo a integridade das informações e permitindo um controle centralizado e seguro sobre o fluxo de pedidos.
