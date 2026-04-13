@@ -7,3 +7,21 @@
 1.3 - O usuário navega pelo cardápio, que é dividido em três opções principais: Categorias, Promoções e Descontos. Ao clicar em um item, o cliente é direcionado para uma tela de especificações para definir detalhes como sabores de pizzas, tipos de sanduíches ou bebidas. É possível adicionar comentários personalizados em cada item antes de inseri-lo no carrinho. Através do carrinho, o usuário acessa a página de finalização, onde pode revisar e modificar os itens escolhidos, além de definir a forma de entrega e o método de pagamento.
 
 1.4 - Os itens estão organizados no cardápio em três seções: "Categoria" (que exibe todo o catálogo), "Combos" e "Promoções". Na parte de categorias, os itens são separados por tipo, como: pizza pequena, média, grande e extra grande (tratadas como itens individuais), sanduíches, hambúrgueres artesanais, sucos, vitaminas, refrigerantes e porções. Na seção de combos, os itens aparecem com seu preço base e, ao serem selecionados, o sistema permite adicionar o combo como um extra, atualizando o valor final (com variações de R$ 10 ou R$ 12, por exemplo). Por fim, a aba de promoções, embora vazia no momento da análise, presume-se que funcione de forma análoga aos combos, direcionando o usuário para a página de customização do item com desconto aplicado.
+
+### Parte 2 – Análise de Arquitetura
+
+Acredito que o sistema utilize três tipos de arquitetura, ou ao menos apresente características compatíveis com elas. A primeira é o padrão arquitetural MVC (Model-View-Controller). É possível identificar a aplicação desse padrão no funcionamento do sistema, considerando que a interface do usuário é relativamente simples e voltada à interação direta. Nesse contexto, a separação entre Model, View e Controller torna-se fundamental para a organização e manutenção do código.
+
+Esse padrão pode ser observado no fluxo de realização de pedidos. Quando o usuário seleciona um item, a requisição é tratada pelo Controller, responsável por definir a lógica de processamento. Em seguida, o Model é atualizado de acordo com as regras de negócio estabelecidas, e a View é responsável por refletir essas alterações, exibindo ao usuário as informações correspondentes, como itens selecionados, valores e detalhes do pedido.
+
+Além disso, há indícios de que o sistema adote uma arquitetura em camadas. Esse modelo é amplamente utilizado devido à sua simplicidade de implementação e facilidade de manutenção. A utilização dessa abordagem é coerente com a característica do sistema, que aparenta ser um software genérico, desenvolvido com funcionalidades amplas e reutilizáveis para atender diferentes perfis de usuários. A arquitetura em camadas permite a modificação isolada de componentes específicos, reduzindo o impacto de alterações e facilitando a adaptação do sistema a novos requisitos.
+
+Também é plausível considerar que o sistema siga uma arquitetura monolítica. Dado que o escopo funcional aparenta ser limitado e centrado na gestão de pedidos, não há uma demanda evidente por uma estrutura baseada em microsserviços. Nesse caso, a adoção de um modelo monolítico contribui para a simplificação do desenvolvimento e da implantação.
+
+Entretanto, apesar da possível adoção de uma arquitetura em camadas, observa-se a presença de alto acoplamento e baixa coesão entre os componentes. Esse problema pode ser identificado por meio de inconsistências na interface e na lógica do sistema, como a apresentação inadequada de preços em combos e a duplicidade de elementos funcionais na interface de finalização de pedidos.
+
+Adicionalmente, há indícios de deficiência na separação de responsabilidades. Problemas como a exibição incorreta de preços e a modelagem redundante de variações de produtos, como tamanhos de pizza, sugerem que as responsabilidades não estão claramente distribuídas entre os componentes do sistema. Essa falta de definição compromete a escalabilidade, a manutenibilidade e a clareza estrutural da aplicação.
+
+### Parte 3 – Análise de Design
+
+* O sistema a
