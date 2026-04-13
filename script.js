@@ -19,9 +19,6 @@ const PedidoService = {
   }
 };
 
-let itens = [];
-let total = 0;
-
 function adicionar() {
   let produto = document.getElementById("produto").value;
   let qtd = document.getElementById("qtd").value;
@@ -109,15 +106,4 @@ function limparTudo() {
 function removerUltimo() {
   itens.pop();
   atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
-  }
-
-  return soma;
 }
