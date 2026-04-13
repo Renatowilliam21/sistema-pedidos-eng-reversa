@@ -22,4 +22,9 @@ Por fim, serão apresentadas sugestões de melhorias para o sistema, além de um
 
 ## Explicações do arquivos:
 
-Será montada no decorrer do processo
+### analise.md
+
+O arquivo analise.md documenta a análise estrutural e comportamental do software. O objetivo é compreender o propósito do sistema e mapear os fluxos de interação do usuário. O documento também apresenta uma avaliação da Arquitetura e do Design, verificando a adoção de padrões arquiteturais adequados. Utilizando técnicas de engenharia reversa a partir da interface disponibilizada, inferimos a qualidade do código no que diz respeito aos princípios de Coesão, Acoplamento e Separação de Responsabilidades (SoC).
+
+
+###  
