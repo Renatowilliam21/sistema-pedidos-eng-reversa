@@ -23,8 +23,7 @@
 
 **2.3 - Classes e Entidades:**
 * **Classe Pedidos:** Armazena dados de desconto, preço total, taxas, total final (com taxas e descontos) e os itens inclusos.
-* **Classe Itens:** Armazena o nome do produto, a quantidade e o preço.
-* **Entidade Cliente:** O agente que realiza os pedidos.
+* **Classe Itens Específicos:** Armazena o nome do produto, a quantidade e o preço.
 
 ### Parte 3 – Arquitetura
 
@@ -37,7 +36,7 @@
 ### Parte 4 – Modelagem
 
 <p align="center">
-  <img src="trabalho_2_(UML).png" alt="Diagrama UML do Sistema">
+  <img src="trabalho_2.1_(UML).png" alt="Diagrama UML do Sistema">
 </p>
 
 ### Parte 5 – Análise de Problemas
