@@ -1,0 +1,63 @@
+======== ARQUITETURA DO SISTEMA ==========
+
+
+1. Qual o objetivo do sistema?
+
+O objetivo do sistema é tornar o processo de pedidos de um restaurante mais simples, rápido e organizado, substituindo métodos antigos como ligações telefônicas por uma solução digital mais prática e eficiente.
+
+2. Quais funcionalidades ele oferece?
+
+O sistema disponibiliza diversas funcionalidades, como um cardápio digital variado, carrinho de compras, opções de entrega (retirada no local ou delivery) e múltiplos métodos de pagamento, proporcionando maior comodidade ao usuário.
+
+3. Como o usuário interage com o sistema?
+
+O usuário interage principalmente por meio do cardápio digital, onde pode selecionar o tipo de refeição, sabores, quantidades e outras opções disponíveis.
+
+Além disso, também é possível interagir com o restaurante via WhatsApp ou presencialmente, utilizando as informações de contato e endereço fornecidas no site.
+
+4. Como os produtos estão organizados?
+
+Os produtos são organizados por categorias, como tamanhos (no caso das pizzas) e variações (como esfirras doces e salgadas).
+
+O sistema também conta com uma aba de “combos”, que reúne ofertas específicas de lanches, e uma seção de promoções, onde são exibidos itens com desconto.
+
+=========== ANÁLISE DE ARQUITETURA ==========
+
+1. Tipo de arquitetura
+
+Com base na observação, é provável que o sistema utilize o modelo MVC (Model-View-Controller), que separa a interface (front-end), a lógica da aplicação (back-end) e o gerenciamento de dados (banco de dados).
+
+Também é possível identificar o modelo cliente-servidor, no qual o cliente realiza solicitações (como pedidos) e o servidor processa informações como pagamento, tempo de entrega e armazenamento dos dados.
+
+Além disso, há indícios de uma arquitetura orientada a eventos, já que determinadas ações (como a finalização de um pedido) disparam respostas automáticas, como envio de confirmação via WhatsApp, impressão da comanda na cozinha e notificação para o entregador.
+
+2. Possível divisão de camadas
+
+A estrutura do sistema provavelmente está dividida em três camadas principais:
+
+Camada de apresentação: responsável pela interface com o usuário.
+Camada de aplicação: onde ocorre o processamento das regras de negócio.
+Camada de dados: responsável pelo armazenamento e gerenciamento das informações no banco de dados.
+
+3. Existência de separação de responsabilidades
+
+O sistema apresenta uma divisão clara de responsabilidades entre suas partes:
+
+Front-end: responsável pela interface visual, incluindo o cardápio, navegação entre abas e exibição do carrinho.
+Back-end: responsável pelo processamento das informações, como envio de dados, pagamentos e integração com a cozinha.
+Administração: área restrita por login, onde é possível gerenciar itens do cardápio, preços e outras configurações.
+Sistema como um todo: deve garantir responsividade, usabilidade e bom funcionamento geral.
+
+=========== ANÁLISE DE DESIGN ==========
+
+1. Coesão
+
+O sistema apresenta boa coesão, pois seus elementos estão organizados de forma lógica, com funções bem definidas, tornando a navegação intuitiva e eficiente.
+
+2. Acoplamento
+
+O sistema demonstra baixo acoplamento, ou seja, suas partes possuem pouca dependência entre si, permitindo modificações em um componente sem afetar significativamente os demais.
+
+3. Separação de resposabilidades
+
+A separação de responsabilidades é bem definida, com distinção clara entre o front-end (interface e interação com o usuário) e as demais camadas do sistema, garantindo melhor organização e manutenção.
