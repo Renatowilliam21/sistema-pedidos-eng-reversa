@@ -33,10 +33,10 @@ function adicionar() {
 
   let preco = 0;
 
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 3;
-  if (produto == "refrigerante") preco = 5;
-  if (produto == "suco") preco = 4;
+  if (produto == "Pastel") preco = 5;
+  if (produto == "Caldo") preco = 3;
+  if (produto == "Refrigerante") preco = 5;
+  if (produto == "Suco") preco = 4;
 
   let subtotal = preco * qtd;
 
@@ -51,10 +51,10 @@ function adicionar() {
   atualizarLista();
 }
 function atualizarLista() {
-  let lista = document.getElementById("lista");
+  let lista = document.getElementById("Lista");
   lista.innerHTML = "";
 
-  total = 0;
+  let itens = PedidoService.itens;
 
   for (let i = 0; i < itens.length; i++) {
     let item = itens[i];
@@ -63,13 +63,13 @@ function atualizarLista() {
     li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
 
     lista.appendChild(li);
-
-    total = total + item.subtotal;
   }
 
-  document.getElementById("total").innerText = total;
+  let total = PedidoService.calcularTotal();
 
-  salvarTotal();
+  document.getElementById("Total").innerText = total;
+
+  salvarTotal(total);
 }
 
 function salvarTotal() {
