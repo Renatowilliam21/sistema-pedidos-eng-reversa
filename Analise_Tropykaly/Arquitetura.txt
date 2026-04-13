@@ -1,0 +1,39 @@
+==== PROPOSTAS DE ARQUITETURA ====
+
+Ao analisar o site, é possível perceber que, apesar de apresentar algumas falhas, sua estrutura geral é sólida e bem organizada.
+
+O sistema segue uma organização em camadas, possivelmente baseada no padrão MVC (Model-View-Controller):
+
+View: corresponde ao front-end, ou seja, a interface visual por meio da qual o usuário interage com o sistema.
+Model: responsável pelo armazenamento dos dados, como preços, descrições dos produtos e informações dos clientes, geralmente mantidos em um banco de dados no servidor.
+Controller: atua como intermediário entre a View e o Model. Por exemplo, ao adicionar um item ao carrinho, o Controller recebe a ação da interface, processa as informações (como cálculo do total) e atualiza os dados no Model.
+
+Separação de responsabilidades
+
+O sistema apresenta uma divisão adequada de responsabilidades, como demonstrado nos exemplos a seguir:
+
+O site acessado pelo cliente não realiza cálculos complexos nem armazena permanentemente o catálogo. Sua principal função é exibir as informações de forma clara e acessível.
+A presença do link “Painel do Sistema” no rodapé indica a existência de um sistema separado, voltado exclusivamente para a gestão administrativa do negócio.
+
+Componentes principais
+
+Catálogo: organizado em blocos independentes por categorias, facilitando a navegação e a busca por produtos.
+Gerenciador de estado: componente dinâmico que atualiza o subtotal e a quantidade de itens no carrinho em tempo real, sem necessidade de recarregar a página.
+Sistema de checkout: etapa final do processo, na qual o usuário informa os dados de entrega e o sistema realiza o processamento da compra.
+
+É bastante provável que o sistema também utilize padrões de projeto como Factory e Singleton:
+
+Factory: utilizado para criar objetos de forma dinâmica, evitando repetição de código e centralizando a lógica de criação.
+Singleton: responsável por garantir uma única instância de um objeto global, como o carrinho de compras, evitando inconsistências e perda de dados.
+
+Como aplicar Factory e Singleton?
+
+Factory:
+O principal objetivo do padrão Factory é separar a lógica de criação de objetos do restante do código. Em vez de instanciar diretamente objetos com new Produto() em várias partes do sistema, essa responsabilidade é delegada a uma “fábrica”.
+
+Aplicação prática: cria-se um método central que recebe parâmetros e retorna o objeto já configurado. Assim, quem utiliza o objeto não precisa conhecer os detalhes de sua criação, apenas utilizá-lo.
+
+Singleton:
+O objetivo do padrão Singleton é garantir que exista apenas uma instância de determinada classe durante toda a execução do sistema, permitindo acesso global a esse objeto.
+
+Aplicação prática: a criação de novos objetos é controlada. Em vez de instanciar repetidamente com new Carrinho(), o sistema utiliza um método estático que verifica se já existe uma instância. Caso exista, retorna a mesma; caso contrário, cria uma nova e a armazena.
