@@ -18,6 +18,14 @@ const PedidoService = {
   }
 };
 
+function ItemFactory(produto, qtd, subtotal) {
+  return {
+    produto,
+    qtd,
+    subtotal
+  };
+}
+
 function adicionar() {
   let produto = document.getElementById("produto").value;
   let qtd = parseInt(document.getElementById("qtd").value);
@@ -37,14 +45,9 @@ function adicionar() {
   let preco = precos[produto];
   let subtotal = preco * qtd;
 
-  let item = {
-    produto,
-    qtd,
-    subtotal
-  };
+  let item = ItemFactory(produto, qtd, subtotal);
 
   PedidoService.adicionarItem(item);
-
   atualizarLista();
 }
 
@@ -58,20 +61,12 @@ function atualizarLista() {
     let item = itens[i];
 
     let li = document.createElement("li");
-    li.innerHTML =
-      item.produto +
-      " | Qtd: " +
-      item.qtd +
-      " | R$ " +
-      item.subtotal;
-
+    li.innerHTML = item.produto +" | Qtd: " + item.qtd + " | R$ " + item.subtotal;
     lista.appendChild(li);
   }
 
   let total = PedidoService.calcularTotal();
-
   document.getElementById("total").innerText = total;
-
   salvarTotal(total);
 }
 
@@ -95,9 +90,7 @@ function finalizar() {
   let totalFinal = total - desconto + taxa;
 
   alert("Total final: R$ " + totalFinal.toFixed(2));
-
   localStorage.setItem("ultimoPedido", totalFinal);
-
   limparTudo();
 }
 
