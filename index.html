@@ -18,10 +18,11 @@
       <option value="suco">Suco</option>
     </select>
 
-    <input type="number" id="qtd" placeholder="Quantidade">
+    <input type="number" id="qtd" placeholder="Quantidade" min="1" value="1">
 
-    <button onclick="adicionar()">Adicionar</button>
-    <button onclick="finalizar()">Finalizar Pedido</button>
+    <button onclick="clickAdcionarPedido()">Adicionar</button>
+    <button onclick="clickRemoverUltimo()">Remover o último item</button>
+    <button onclick="clickFinalizarPedido()">Finalizar Pedido</button>
   </div>
 
   <div class="lista">

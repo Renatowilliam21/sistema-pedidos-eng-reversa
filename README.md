@@ -1,7 +1,9 @@
-# Sistema de Pedidos - Engenharia Reversa
+# Atividade 2 - Arquitetura de Sistemas - Engenharia Reversa
 
-## 🎓 Disciplina
-Arquitetura de Sistemas  
+## Informações da Atividade
+**Aluno:** Dan Mendes de Souza Nogueira Ribeiro  
+**Semestre:** 3° Semestre  
+**Disciplina:** Arquitetura de Sistemas  
 **Professor:** Dr. Renato William Rodrigues de Souza  
 **Curso:** Análise e Desenvolvimento de Sistemas  
 **Instituição:** IFCE - Campus Boa Viagem  
@@ -10,70 +12,10 @@ Arquitetura de Sistemas
 
 ## Sobre o Projeto
 
-Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
+Este projeto consiste em uma atividade avaliativa da disciplina de Arquitetura de Sistemas, baseada na análise técnica de um código-fonte fornecido pelo docente.
 
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
+O trabalho foca na avaliação da arquitetura e do design de software. Inicialmente, realizaremos um diagnóstico para identificar falhas de estruturação, defeitos de design e as principais características do sistema. Com base nessa análise, será elaborado um diagrama UML para representar a compreensão técnica do programa e de suas relações.
 
----
-
-## Objetivo da Atividade
-
-O objetivo é aplicar conceitos de:
-
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
+Por fim, proporemos melhorias estruturais e realizaremos uma refatoração no código, visando adequá-lo aos padrões de produção e às boas práticas de modelagem.
 
 ---
-
-## Desafio
-
-Você deverá:
-
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
-
----
-
-## O que analisar
-
-Durante a análise, identifique problemas relacionados a:
-
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
-
----
-
-## Implementações obrigatórias
-
-Você deve aplicar no sistema:
-
-### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
-
-### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
-
----
-
-## Como executar o projeto
-
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
-
----
-
-## 💻 Como clonar o repositório
-
-```bash
-git clone LINK_DO_REPOSITORIO
