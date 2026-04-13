@@ -77,6 +77,8 @@ function salvarTotal(total) {
 }
 
 function finalizar() {
+  let total = PedidoService.calcularTotal();
+
   let desconto = 0;
 
   if (total > 100) {
