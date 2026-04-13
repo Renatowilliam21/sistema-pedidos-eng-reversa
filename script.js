@@ -1,3 +1,23 @@
+const PedidoService = {
+  itens: [],
+
+  adicionarItem(item) {
+    this.itens.push(item);
+  },
+
+  removerUltimo() {
+    this.itens.pop();
+  },
+
+  calcularTotal() {
+    return this.itens.reduce((soma, item) => soma + item.subtotal, 0);
+  },
+
+  limpar() {
+    this.itens = [];
+  }
+};
+
 let itens = [];
 let total = 0;
 
