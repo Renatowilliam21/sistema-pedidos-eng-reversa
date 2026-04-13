@@ -1,0 +1,39 @@
+==== COMPARAÇÃO DE SISTEMAS ====
+
+Critérios:
+
+Arquitetura
+Coesão
+Acoplamento
+Organização
+Flexibilidade
+
+1. Arquitetura
+
+O sistema real apresenta uma arquitetura mais robusta, combinando diferentes modelos, como MVC, cliente-servidor e arquitetura orientada a eventos.
+
+Já o sistema didático utiliza apenas o padrão MVC, separando front-end e back-end e utilizando armazenamento local (localStorage). No entanto, não implementa uma arquitetura cliente-servidor, pois não há conexão com um servidor real, sendo executado apenas em ambiente local (localhost).
+
+2. Coesão
+
+O sistema real possui boa coesão, com elementos organizados de forma lógica, objetivos bem definidos e navegação intuitiva.
+
+O sistema didático também apresenta alta coesão, com seus componentes bem posicionados. A principal diferença está na interface: enquanto o sistema real possui um visual mais elaborado, o sistema didático é mais simples e direto.
+
+3. Acoplamento
+
+O sistema real apresenta baixo acoplamento, permitindo manutenção e evolução sem comprometer outras partes do sistema, já que seus componentes são relativamente independentes.
+
+O sistema didático, por termos acesso ao seu código, também demonstra baixo acoplamento, utilizando padrões de projeto como Factory e Singleton para organizar melhor suas estruturas.
+
+4. Organização
+
+O sistema real possui uma organização visual eficiente, com produtos distribuídos em grids e categorias, tornando a navegação mais atrativa.
+
+O sistema didático, por outro lado, apresenta uma interface mais simples e menos estruturada visualmente. Entretanto, seu código é bem organizado, fazendo uso de padrões de projeto como Factory e Singleton, o que contribui para sua manutenção e funcionamento.
+
+5. Flexibilidade
+
+O sistema real provavelmente possui alta flexibilidade. Mesmo sem acesso ao código, sua estrutura modular e divisão de responsabilidades indicam que ele pode ser adaptado com mais facilidade a mudanças no negócio.
+
+Já o sistema didático apresenta menor flexibilidade. Para adicionar novos itens, por exemplo, é necessário modificar manualmente o código, o que reduz a autonomia do gestor e dificulta a manutenção sem conhecimento técnico.
