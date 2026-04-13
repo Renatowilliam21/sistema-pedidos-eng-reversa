@@ -1,0 +1,11 @@
+==== MELHORIAS ====
+
+1. Defeitos do sistema:
+
+Falta de uma barra de pesquisa ou filtro. Como o cardápio é extenso, isso pode dificultar a navegação do usuário, que precisa percorrer toda a lista para encontrar um item específico.
+As imagens ilustrativas são repetitivas e genéricas, não representando fielmente os produtos oferecidos, o que pode gerar frustração no cliente.
+
+2. Possíveis melhorias:
+
+Barra de pesquisa: considerando a grande variedade de produtos, a implementação de um campo de busca permitiria ao usuário encontrar itens de forma mais rápida e direta.
+Fotos reais dos produtos: a utilização de imagens reais dos lanches aumentaria a confiabilidade do sistema e reduziria a possibilidade de frustração ao receber um pedido diferente do esperado.
