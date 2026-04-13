@@ -1,3 +1,4 @@
+// responsável por gerenciar os pedidos
 const PedidoService = {
   itens: [],
 
@@ -27,26 +28,28 @@ function adicionar() {
 
   if (qtd == "" || qtd <= 0) {
     alert("Quantidade inválida");
+    return;
   }
 
   let preco = 0;
 
   if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
+  if (produto == "caldo") preco = 3;
+  if (produto == "refrigerante") preco = 5;
+  if (produto == "suco") preco = 4;
 
   let subtotal = preco * qtd;
 
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
+  let item = {
+    produto,
+    qtd,
+    subtotal
+  };
+
+  PedidoService.adicionarItem(item);
 
   atualizarLista();
 }
-
 function atualizarLista() {
   let lista = document.getElementById("lista");
   lista.innerHTML = "";
