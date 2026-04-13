@@ -1,99 +1,90 @@
-let itens = [];
-let total = 0;
+// Tudo o que está aqui dentro só existe neste bloco (escopo local)
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // 1. A variável itens agora é LOCAL e protegida.
+  let itens = [];
 
-function adicionar() {
-  let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
+  // 2. Capturamos os botões do HTML via JavaScript (adicione IDs a eles no seu HTML)
+  const btnAdicionar = document.getElementById("btnAdicionar");
+  const btnFinalizar = document.getElementById("btnFinalizar");
 
-  if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
+  function adicionar() {
+    let produto = document.getElementById("produto").value;
+    let qtd = document.getElementById("qtd").value;
+
+    if (qtd == "" || qtd <= 0) {
+      alert("Quantidade inválida");
+      return; // Retorno adicionado para impedir que itens inválidos entrem na lista
+    }
+
+    let preco = 0;
+    if (produto == "pastel") preco = 5;
+    if (produto == "caldo") preco = 7;
+    if (produto == "refrigerante") preco = 4;
+    if (produto == "suco") preco = 6;
+
+    let subtotal = preco * qtd;
+
+    itens.push({
+      produto: produto,
+      qtd: qtd,
+      subtotal: subtotal
+    });
+
+    atualizarLista();
   }
 
-  let preco = 0;
+  function atualizarLista() {
+    let lista = document.getElementById("lista");
+    lista.innerHTML = "";
 
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
+    let total = 0;
 
-  let subtotal = preco * qtd;
+    for (let i = 0; i < itens.length; i++) {
+      let item = itens[i];
 
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
+      let li = document.createElement("li");
+      li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
 
-  atualizarLista();
-}
+      lista.appendChild(li);
 
-function atualizarLista() {
-  let lista = document.getElementById("lista");
-  lista.innerHTML = "";
+      total = total + item.subtotal;
+    }
 
-  total = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
-
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
-    lista.appendChild(li);
-
-    total = total + item.subtotal;
+    document.getElementById("total").innerText = total;
+    localStorage.setItem("total", total);
   }
 
-  document.getElementById("total").innerText = total;
+  function finalizar() {
+    let desconto = 0;
+    // Boa prática: converter o retorno do localStorage (que é string) para Número
+    let total = Number(localStorage.getItem("total")); 
 
-  salvarTotal();
-}
+    if (total > 100) {
+      desconto = total * 0.2;
+    } else if (total > 50) {
+      desconto = total * 0.1;
+    }
 
-function salvarTotal() {
-  // duplicação de responsabilidade
-  localStorage.setItem("total", total);
-}
+    let taxa = total * 0.05;
+    let totalFinal = total - desconto + taxa;
 
-function finalizar() {
-  let desconto = 0;
+    alert("Total final: R$ " + totalFinal.toFixed(2));
 
-  if (total > 100) {
-    desconto = total * 0.2;
-  } else if (total > 50) {
-    desconto = total * 0.1;
+    localStorage.setItem("ultimoPedido", totalFinal);
+    limparTudo();
   }
 
-  let taxa = total * 0.05;
+  function limparTudo() {
+    itens = []; // Como esta função está dentro do mesmo bloco, ela altera a variável local
+    localStorage.setItem("total", 0);
 
-  let totalFinal = total - desconto + taxa;
-
-  alert("Total final: " + totalFinal);
-
-  localStorage.setItem("ultimoPedido", totalFinal);
-
-  limparTudo();
-}
-
-function limparTudo() {
-  itens = [];
-  total = 0;
-
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
-}
-
-function removerUltimo() {
-  itens.pop();
-  atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
+    document.getElementById("lista").innerHTML = "";
+    document.getElementById("total").innerText = 0;
   }
 
-  return soma;
-}
+  // 3. Em vez de usar onclick no HTML, atrelamos os eventos aqui
+  if (btnAdicionar) btnAdicionar.addEventListener("click", adicionar);
+  if (btnFinalizar) btnFinalizar.addEventListener("click", finalizar);
+
+});

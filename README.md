@@ -76,4 +76,4 @@ Utilizar para garantir uma única instância (ex: controle do pedido ou persist�
 ## 💻 Como clonar o repositório
 
 ```bash
-git clone LINK_DO_REPOSITORIO
+git clone https://github.com/LuizHenrique704/sistema-pedidos-eng-reversa.git
