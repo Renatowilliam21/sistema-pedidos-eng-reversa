@@ -72,9 +72,8 @@ function atualizarLista() {
   salvarTotal(total);
 }
 
-function salvarTotal() {
-  // duplicação de responsabilidade
-  localStorage.setItem("total", total);
+function salvarTotal(total) {
+  localStorage.setItem("Total", total);
 }
 
 function finalizar() {
