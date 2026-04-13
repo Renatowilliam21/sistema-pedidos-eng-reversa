@@ -1,9 +1,9 @@
 # Atividade 2 - Arquitetura de Sistemas - Engenharia Reversa
 
 ## Informações da Atividade
-**Aluno:** Dan Mendes de Souza Nogueira Ribeiro
-**Semestre:** 3° Semestre
-**Disciplina:** Arquitetura de Sistemas
+**Aluno:** Dan Mendes de Souza Nogueira Ribeiro  
+**Semestre:** 3° Semestre  
+**Disciplina:** Arquitetura de Sistemas  
 **Professor:** Dr. Renato William Rodrigues de Souza  
 **Curso:** Análise e Desenvolvimento de Sistemas  
 **Instituição:** IFCE - Campus Boa Viagem  
