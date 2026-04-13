@@ -1,4 +1,3 @@
-// responsável por gerenciar os pedidos
 const PedidoService = {
   itens: [],
 
@@ -21,20 +20,21 @@ const PedidoService = {
 
 function adicionar() {
   let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
+  let qtd = parseInt(document.getElementById("qtd").value);
 
-  if (qtd == "" || qtd <= 0) {
+  if (!qtd || qtd <= 0) {
     alert("Quantidade inválida");
     return;
   }
 
-  let preco = 0;
+  const precos = {
+    pastel: 5,
+    caldo: 3,
+    refrigerante: 5,
+    suco: 4
+  };
 
-  if (produto == "Pastel") preco = 5;
-  if (produto == "Caldo") preco = 3;
-  if (produto == "Refrigerante") preco = 5;
-  if (produto == "Suco") preco = 4;
-
+  let preco = precos[produto];
   let subtotal = preco * qtd;
 
   let item = {
@@ -47,8 +47,9 @@ function adicionar() {
 
   atualizarLista();
 }
+
 function atualizarLista() {
-  let lista = document.getElementById("Lista");
+  let lista = document.getElementById("lista");
   lista.innerHTML = "";
 
   let itens = PedidoService.itens;
@@ -57,20 +58,25 @@ function atualizarLista() {
     let item = itens[i];
 
     let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
+    li.innerHTML =
+      item.produto +
+      " | Qtd: " +
+      item.qtd +
+      " | R$ " +
+      item.subtotal;
 
     lista.appendChild(li);
   }
 
   let total = PedidoService.calcularTotal();
 
-  document.getElementById("Total").innerText = total;
+  document.getElementById("total").innerText = total;
 
   salvarTotal(total);
 }
 
 function salvarTotal(total) {
-  localStorage.setItem("Total", total);
+  localStorage.setItem("total", total);
 }
 
 function finalizar() {
@@ -88,7 +94,7 @@ function finalizar() {
 
   let totalFinal = total - desconto + taxa;
 
-  alert("Total final: " + totalFinal);
+  alert("Total final: R$ " + totalFinal.toFixed(2));
 
   localStorage.setItem("ultimoPedido", totalFinal);
 
@@ -96,14 +102,13 @@ function finalizar() {
 }
 
 function limparTudo() {
-  itens = [];
-  total = 0;
+  PedidoService.limpar();
 
   document.getElementById("lista").innerHTML = "";
   document.getElementById("total").innerText = 0;
 }
 
 function removerUltimo() {
-  itens.pop();
+  PedidoService.removerUltimo();
   atualizarLista();
 }
