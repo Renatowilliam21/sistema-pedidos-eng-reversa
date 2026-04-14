@@ -18,9 +18,10 @@
       <option value="suco">Suco</option>
     </select>
 
-    <input type="number" id="qtd" placeholder="Quantidade">
+    <input type="number" id="qtd" placeholder="Quantidade" min="1">
 
     <button onclick="adicionar()">Adicionar</button>
+    <button onclick="removerUltimo()">Remover Último</button>
     <button onclick="finalizar()">Finalizar Pedido</button>
   </div>
 
@@ -30,11 +31,15 @@
   </div>
 
   <div class="total">
-    <h2>Total: R$ <span id="total">0</span></h2>
+    <h2>Total: R$ <span id="total">0.00</span></h2>
   </div>
 </div>
 
+<script src="models.js"></script>
+<script src="factory.js"></script>
+<script src="singleton.js"></script>
 <script src="script.js"></script>
+<script src="ui.js"></script>
 
 </body>
 </html>
