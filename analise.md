@@ -8,6 +8,8 @@
 
 1.4 - Os itens estão organizados no cardápio em três seções: "Categoria" (que exibe todo o catálogo), "Combos" e "Promoções". Na parte de categorias, os itens são separados por tipo, como: pizza pequena, média, grande e extra grande (tratadas como itens individuais), sanduíches, hambúrgueres artesanais, sucos, vitaminas, refrigerantes e porções. Na seção de combos, os itens aparecem com seu preço base e, ao serem selecionados, o sistema permite adicionar o combo como um extra, atualizando o valor final (com variações de R$ 10 ou R$ 12, por exemplo). Por fim, a aba de promoções, embora vazia no momento da análise, presume-se que funcione de forma análoga aos combos, direcionando o usuário para a página de customização do item com desconto aplicado.
 
+---
+
 ### Parte 2 – Análise de Arquitetura
 
 Acredito que o sistema utilize três tipos de arquitetura, ou ao menos apresente características compatíveis com elas. A primeira é o padrão arquitetural MVC (Model-View-Controller). É possível identificar a aplicação desse padrão no funcionamento do sistema, considerando que a interface do usuário é relativamente simples e voltada à interação direta. Nesse contexto, a separação entre Model, View e Controller torna-se fundamental para a organização e manutenção do código.
@@ -22,10 +24,12 @@ Entretanto, apesar da possível adoção de uma arquitetura em camadas, observa-
 
 Adicionalmente, há indícios de deficiência na separação de responsabilidades. Problemas como a exibição incorreta de preços e a modelagem redundante de variações de produtos, como tamanhos de pizza, sugerem que as responsabilidades não estão claramente distribuídas entre os componentes do sistema. Essa falta de definição compromete a escalabilidade, a manutenibilidade e a clareza estrutural da aplicação.
 
+---
+
 ### Parte 3 – Análise de Design
 
 * Coesão: Na minha análise, o sistema apresenta uma baixa coesão. Primeiramente, é possível identificar que o projeto tem problemas para gerenciar certas regras. Por exemplo, quando o estabelecimento está fechado, o usuário não deveria conseguir fazer compras. Porém, ao clicar em um item, você é mandado para a página de especificações para só então receber um alerta de que a loja está fechada, sendo jogado de volta para a página inicial. Esse fluxo é desnecessário e complexo. Além disso, a página de finalizar pedido possui dois botões idênticos de finalização, algo redundante que deixa o código mais confuso. Tudo isso indica que o sistema possui baixa coesão.
 
 * Acoplamento: Com base nos exemplos anteriores, é perceptível que o sistema também apresenta um alto acoplamento. Isso fica evidente na forma como os itens são tratados: produtos semelhantes, como sanduíches e hambúrgueres artesanais, possuem telas separadas apenas para escolher sabores e especificidades. Além disso, os 4 tamanhos de pizza são separados como itens completamente diferentes no cardápio. Isso deixa o código excessivamente grande e cria funções redundantes que estão fortemente interligadas, gerando um alto acoplamento e deixando a experiência do usuário mais confusa e frustrante.
 
-* Separação de Responsabilidades: Como mencionado, o sistema tem uma baixa separação de responsabilidades. Problemas já citados — como a modelagem redundante das variações de produtos, a forma estranha de restringir o acesso quando a loja está fechada e os botões duplicados — mostram que houve uma falta de planejamento durante o desenvolvimento. Essas falhas visíveis deixam claro que a separação de responsabilidades no código foi feita de forma bastante precária.
+* Separação de Responsabilidades: Como mencionado, o sistema tem uma baixa separação de responsabilidades. Problemas já citados, como a modelagem redundante das variações de produtos, a forma estranha de restringir o acesso quando a loja está fechada e os botões duplicados, mostram que houve uma falta de planejamento durante o desenvolvimento. Essas falhas visíveis deixam claro que a separação de responsabilidades no código foi feita de forma bastante precária.
