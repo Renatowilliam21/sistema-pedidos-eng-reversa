@@ -24,6 +24,10 @@
 
 1.3 - A Plataforma exibe os Pedidos: A Plataforma é responsável por recuperar e apresentar as informações dos pedidos na interface para o usuário.
 
+1.4 - A Plataforma informa a API: A Plataforma é informa a API do pedido do cliente para que ela possa mandar as informações do whatsapp.
+
+1.5 - A API avisa o Administrador: O Administrador é avisado pela API sobre o pedido feito pelo Cliente.
+
 2 - **Agregação:**
 
 2.1 Cliente e Pedidos: O Cliente (Todo) possui uma coleção de Pedidos (Parte). Caso um pedido seja cancelado ou removido, o objeto Cliente permanece intacto no banco de dados.
