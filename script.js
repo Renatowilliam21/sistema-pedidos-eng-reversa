@@ -1,99 +1,81 @@
-let itens = [];
-let total = 0;
+class ProdutoFactory {
+    static criarProduto(nome) {
+        let preco = 0;
+        switch (nome) {
+            case "pastel": preco = 5; break;
+            case "caldo": preco = 7; break;
+            case "refrigerante": preco = 4; break;
+            case "suco": preco = 6; break;
+            default: throw new Error("Produto não cadastrado");
+        }
+        return { nome, preco };
+    }
+}
+
+class ItemPedido {
+    constructor(produto, quantidade) {
+        this.produto = produto.nome;
+        this.quantidade = parseInt(quantidade);
+        this.subtotal = produto.preco * this.quantidade;
+    }
+}
+
+class GerenciadorPedidos {
+    static instance;
+    constructor() {
+        if (GerenciadorPedidos.instance) return GerenciadorPedidos.instance;
+        this.itens = [];
+        this.totalGeral = 0;
+        GerenciadorPedidos.instance = this;
+    }
+    adicionarItem(produtoNome, quantidade) {
+        const produto = ProdutoFactory.criarProduto(produtoNome);
+        const novoItem = new ItemPedido(produto, quantidade);
+        this.itens.push(novoItem);
+        this.calcularTotalGeral();
+    }
+    calcularTotalGeral() {
+        this.totalGeral = this.itens.reduce((acc, item) => acc + item.subtotal, 0);
+    }
+    calcularFinal(total) {
+        let desconto = 0;
+        if (total > 100) desconto = total * 0.2;
+        else if (total > 50) desconto = total * 0.1;
+        const taxa = total * 0.05;
+        return total - desconto + taxa;
+    }
+    limpar() {
+        this.itens = [];
+        this.totalGeral = 0;
+    }
+}
+
+const gerenciador = new GerenciadorPedidos();
 
 function adicionar() {
-  let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
-
-  if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
-  }
-
-  let preco = 0;
-
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
-
-  let subtotal = preco * qtd;
-
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
-
-  atualizarLista();
+    const produtoNome = document.getElementById("produto").value;
+    const qtd = document.getElementById("qtd").value;
+    if (!qtd || qtd <= 0) { alert("Quantidade inválida"); return; }
+    gerenciador.adicionarItem(produtoNome, qtd);
+    atualizarUI();
 }
 
-function atualizarLista() {
-  let lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  total = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
-
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
-    lista.appendChild(li);
-
-    total = total + item.subtotal;
-  }
-
-  document.getElementById("total").innerText = total;
-
-  salvarTotal();
-}
-
-function salvarTotal() {
-  // duplicação de responsabilidade
-  localStorage.setItem("total", total);
+function atualizarUI() {
+    const listaUI = document.getElementById("lista");
+    const totalUI = document.getElementById("total");
+    listaUI.innerHTML = "";
+    gerenciador.itens.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = `${item.produto} | Qtd: ${item.quantidade} | R$ ${item.subtotal.toFixed(2)}`;
+        listaUI.appendChild(li);
+    });
+    totalUI.innerText = gerenciador.totalGeral.toFixed(2);
 }
 
 function finalizar() {
-  let desconto = 0;
-
-  if (total > 100) {
-    desconto = total * 0.2;
-  } else if (total > 50) {
-    desconto = total * 0.1;
-  }
-
-  let taxa = total * 0.05;
-
-  let totalFinal = total - desconto + taxa;
-
-  alert("Total final: " + totalFinal);
-
-  localStorage.setItem("ultimoPedido", totalFinal);
-
-  limparTudo();
-}
-
-function limparTudo() {
-  itens = [];
-  total = 0;
-
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
-}
-
-function removerUltimo() {
-  itens.pop();
-  atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
-  }
-
-  return soma;
+    const totalFinal = gerenciador.calcularFinal(gerenciador.totalGeral);
+    alert(`Total final: R$ ${totalFinal.toFixed(2)}`);
+    localStorage.setItem("ultimoPedido", totalFinal);
+    gerenciador.limpar();
+    atualizarUI();
 }
