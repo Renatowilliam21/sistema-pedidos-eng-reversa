@@ -1,99 +1,97 @@
+const precos = {
+    pastel: 5,
+    caldo: 7,
+    refrigerante: 4,
+    suco: 6,
+  };
+
 let itens = [];
 let total = 0;
 
 function adicionar() {
   let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
+  let qtd = Number(document.getElementById("qtd").value);
 
   if (qtd == "" || qtd <= 0) {
     alert("Quantidade inválida");
+    return;
   }
 
-  let preco = 0;
 
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
+  const preco = precos[produto];
 
-  let subtotal = preco * qtd;
+  const item = {
+    produto,
+    qtd,
+    subtotal: preco * qtd,
+  };
+  
 
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
+itens.push(item);
 
   atualizarLista();
 }
 
 function atualizarLista() {
-  let lista = document.getElementById("lista");
+ total = calcularTotal();
+ renderizarLista();
+ salvarTotal();
+}
+  
+function calcularTotal() {
+  return itens.reduce((soma, item) => soma + item.subtotal, 0);
+}
+
+
+function renderizarLista() {
+  const lista = document.getElementById("lista");
   lista.innerHTML = "";
 
-  total = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
-
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
+  itens.forEach((item) => {
+    const li = document.createElement("li");
+    li.innerText = `${item.qtd}x ${item.produto} - R$${item.subtotal}`;
     lista.appendChild(li);
-
-    total = total + item.subtotal;
-  }
+  });
 
   document.getElementById("total").innerText = total;
-
-  salvarTotal();
 }
 
 function salvarTotal() {
-  // duplicação de responsabilidade
   localStorage.setItem("total", total);
 }
 
 function finalizar() {
-  let desconto = 0;
+  const desconto = calcularDesconto(total);
+  const taxa = total * 0.05;
 
-  if (total > 100) {
-    desconto = total * 0.2;
-  } else if (total > 50) {
-    desconto = total * 0.1;
-  }
+  const totalFinal = total - desconto + taxa;
 
-  let taxa = total * 0.05;
+  alert(`Total final: R$ ${totalFinal}`);
 
-  let totalFinal = total - desconto + taxa;
-
-  alert("Total final: " + totalFinal);
-
-  localStorage.setItem("ultimoPedido", totalFinal);
+  localStorage.setItem("Ultimopedido", totalFinal);
 
   limparTudo();
+}
+
+
+
+
+function calcularDesconto(valor) {
+  if (valor > 100) return valor * 0.2;
+  if (valor > 50) return valor * 0.1;
+  return 0;
+}
+
+function removerUltimo() {
+  if (itens.length === 0) return;
+
+  itens.pop();
+  atualizarLista();
 }
 
 function limparTudo() {
   itens = [];
   total = 0;
 
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
-}
-
-function removerUltimo() {
-  itens.pop();
-  atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
-  }
-
-  return soma;
+  renderizarLista();
 }
