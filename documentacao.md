@@ -68,4 +68,10 @@
 * [cite_start]**Acoplamento Alto:** O JavaScript está fortemente ligado a IDs específicos do HTML, tornando o código frágil[cite: 69].
 * [cite_start]**Separação de Responsabilidades Inexistente:** Regras de negócio estão misturadas com funções de interface e alertas[cite: 70].
 * [cite_start]**Duplicação de Código:** A lógica de soma aparece em múltiplas funções[cite: 71].
-* [cite_start]**Organização Pobre:** O uso de variáveis globais facilita erro
+
+
+
+## Parte 6 – Propostas de Melhoria
+* **Organização em camadas:** Separar a Lógica de Negócio da manipulação de Visão (UI).
+* **Criação de classes:** Implementar POO para encapsular atributos e comportamentos.
+* **Padrões de projeto:** Utilizar Factory para centralizar a criação de produtos e Singleton para garantir estado único do carrinho.
