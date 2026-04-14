@@ -75,3 +75,10 @@
 * **Organização em camadas:** Separar a Lógica de Negócio da manipulação de Visão (UI).
 * **Criação de classes:** Implementar POO para encapsular atributos e comportamentos.
 * **Padrões de projeto:** Utilizar Factory para centralizar a criação de produtos e Singleton para garantir estado único do carrinho.
+
+## Parte 7 - Refatoração
+A refatoração foi aplicada no arquivo `script.js`. A lógica de negócios foi separada da manipulação do DOM. Funções de cálculo duplicadas foram removidas e o estado da aplicação foi centralizado.
+
+## Parte 8 – Aplicação de Padrões de Projeto
+* **Factory (`ProdutoFactory`):** Aplicado na instanciação de produtos para centralizar a tabela de preços. Utilizado para que o gerenciador de pedidos não precise conhecer a lógica de precificação.
+* **Singleton (`GerenciadorPedidos`):** Aplicado no controle geral do pedido. Utilizado para garantir que exista apenas um "carrinho" ativo na memória, prevenindo inconsistências nos dados e variáveis globais soltas.
