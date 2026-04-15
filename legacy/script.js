@@ -1,3 +1,24 @@
+/*
+  Arquivo legado (legacy)
+
+  Este arquivo contém a implementação original do sistema de pedidos.
+  Ele foi mantido no projeto apenas para fins de referência histórica
+  e comparação com a versão refatorada.
+
+  Durante a Parte 7 da atividade (Refatoração), o código foi reorganizado
+  com o objetivo de melhorar a separação de responsabilidades, coesão
+  e organização geral do sistema.
+
+  A lógica foi dividida em novos arquivos:
+  - pedido.js (responsável pelos dados e regras de negócio)
+  - app.js (responsável pela interação com a interface)
+
+  Todas as funcionalidades originais foram preservadas na nova estrutura,
+  porém com uma arquitetura mais organizada e de fácil manutenção.
+
+  Este arquivo não é mais utilizado pelo sistema atual.
+*/
+
 let itens = [];
 let total = 0;
 
