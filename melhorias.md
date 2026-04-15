@@ -10,7 +10,10 @@ A prioridade deve ser a reestruturação do código para uma arquitetura em cama
 
 ### Parte 9 – Aplicação de Padrões
 
----
+• **Factory:**: Este padrão pode ser aplicado à classe `Itens Específicos` para padronizar a criação de objetos. A utilização de uma Factory centraliza a lógica de instanciação e as validações internas, garantindo um ponto de acesso único e seguro para a montagem dos itens. Isso elimina a necessidade de funções de criação externas e públicas (que aumentam a superfície de erro), reduzindo a complexidade e reforçando o encapsulamento.
 
+• **Singleton:**: O padrão será aplicado à classe `Pedidos` para assegurar que exista uma única instância global controlando o estado atual da compra. Sendo uma das classes mais críticas do sistema, o Singleton ajuda a evitar falhas de sincronização, inconsistência de dados e problemas de gerenciamento de memória. Ele garante um controle restrito e seguro do fluxo de informações, permitindo uma validação centralizada de todas as operações do pedido.
+
+---
 
 ### Parte 10 – Reflexão Crítica
