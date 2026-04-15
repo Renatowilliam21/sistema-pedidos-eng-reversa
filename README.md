@@ -1,7 +1,9 @@
-# Sistema de Pedidos - Engenharia Reversa
+# Atividade 3 - Arquitetura de Sistemas - Engenharia Reversa
 
-## 🎓 Disciplina
-Arquitetura de Sistemas  
+## Informações da Atividade
+**Aluno:** Dan Mendes de Souza Nogueira Ribeiro
+**Semestre:** 3° Semestre
+**Disciplina:** Arquitetura de Sistemas
 **Professor:** Dr. Renato William Rodrigues de Souza  
 **Curso:** Análise e Desenvolvimento de Sistemas  
 **Instituição:** IFCE - Campus Boa Viagem  
@@ -10,70 +12,32 @@ Arquitetura de Sistemas
 
 ## Sobre o Projeto
 
-Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
+Este projeto trata-se de uma atividade avaliativa da disciplina de Arquitetura de Sistemas. Nele, será realizada uma análise, por meio de engenharia reversa, de um sistema de pedidos disponível em: **<https://tropykalypizzaselanches.com.br/>**, este será o sistema objeto de estudo.
 
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
+A atividade terá como foco a arquitetura e o design do software. Para isso, serão utilizados modelos de projeto como base para avaliar a qualidade do sistema e identificar suas principais características. A partir dessa análise, será feita uma modelagem considerando apenas os aspectos visuais observáveis, que posteriormente dará origem à construção de um diagrama UML.
 
----
-
-## Objetivo da Atividade
-
-O objetivo é aplicar conceitos de:
-
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
+Por fim, serão apresentadas sugestões de melhorias para o sistema, além de uma análise crítica sobre o próprio processo realizado, com o objetivo de avaliar a evolução e o entendimento adquiridos ao longo da atividade.
 
 ---
 
-## Desafio
+## Explicações dos arquivos
 
-Você deverá:
+### analise.md
 
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
+Este documento detalha a análise estrutural e comportamental do software, com o objetivo de elucidar o propósito do sistema e mapear os fluxos de interação do usuário. A análise inclui uma avaliação crítica da arquitetura e do design, verificando a conformidade com padrões arquiteturais consolidados. Através de técnicas de engenharia reversa aplicadas à interface, inferimos a qualidade interna do código sob a ótica dos princípios de Coesão, Acoplamento e Separação de Responsabilidades.
 
----
+### arquitetura.md
 
-## O que analisar
+O arquivo apresenta a modelagem do sistema por meio da visualização e interpretação de diagramas UML. O foco recai sobre a análise das classes e suas respectivas responsabilidades técnicas. Além disso, descreve a infraestrutura lógica do software, detalhando a interação entre entidades, a organização do cardápio via hierarquia de herança e como as regras de multiplicidade asseguram a integridade dos dados e a fluidez do fluxo operacional dos pedidos.
 
-Durante a análise, identifique problemas relacionados a:
+### comparacao.md
 
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
+Este documento foca na identificação de padrões de projeto e na análise comparativa de arquiteturas. Examina-se a implementação dos padrões MVC, Factory e Singleton. Por fim, estabelece-se um paralelo técnico entre o sistema analisado e o modelo didático desenvolvido na Atividade 2 - **<https://github.com/playsonic/sistema-pedidos-eng-reversa/tree/melhoria-sistema?authuser=2#/>**, destacando divergências e convergências estruturais.
 
----
+### melhorias.md
 
-## Implementações obrigatórias
+Dedicado ao diagnóstico técnico e à proposição de evoluções arquiteturais, este arquivo analisa falhas estruturais do sistema e sugere soluções fundamentadas em Engenharia de Software. O documento encerra-se com uma reflexão crítica sobre a relevância da modelagem sistêmica, abordando as distinções pragmáticas entre o desenvolvimento de projetos em escala real e o ambiente acadêmico.
 
-Você deve aplicar no sistema:
+### modelagem.png
 
-### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
-
-### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
-
----
-
-## Como executar o projeto
-
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
-
----
-
-## 💻 Como clonar o repositório
-
-```bash
-git clone LINK_DO_REPOSITORIO
+Representação gráfica do sistema através de um Diagrama de Classes UML.
