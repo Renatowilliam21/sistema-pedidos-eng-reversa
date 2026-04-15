@@ -10,9 +10,11 @@
 
 4 - `Pedidos`: Funciona como a representação do "Carrinho de Compras" e do fechamento da venda. Serve para agrupar as informações gerais das escolhas do cliente, tais como valor total, frete e método de pagamento. Suas responsabilidades incluem a manipulação de itens (adicionar/remover) e o cálculo do valor final do pedido.
 
-5 - `ItensEspecificos`: É uma abstração que define o que pode ser incluído em um pedido. Caso o sistema utilize uma estrutura orientada a objetos, esta classe funciona como um molde, concentrando atributos comuns a todos os produtos da loja, como preço, adicionais, comentários e categoria.
+5 - `API`: Atua como o módulo de integração e comunicação externa do sistema. Ela é responsável por gerenciar o fluxo de notificações em tempo real, utilizando os dados do pedido recém-criado para formatar e disparar alertas. Suas ações principais concentram-se na automação de mensagens (como via WhatsApp), possuindo métodos específicos para avisar o Administrador sobre novas vendas e manter o Cliente atualizado sobre o status de sua compra. Sua presença no diagrama é justificada pela necessidade de conectar o sistema a serviços de mensageria de terceiros, garantindo agilidade logística e melhorando a experiência de acompanhamento.
 
-6 - Subclasses: São as classes filhas de ItensEspecificos e representam os produtos reais do cardápio. Através do conceito de herança, elas herdam automaticamente os atributos da classe pai (como o preço), evitando redundância de código. Elas armazenam apenas o que é exclusivo de cada tipo, como: `Pizzas`, `Sanduíches`, `Sucos`, `Refrigerantes`, `Hambúrgueres` `Artesanais`, `Vitaminas` e `Porções`.
+6 - `ItensEspecificos`: É uma abstração que define o que pode ser incluído em um pedido. Caso o sistema utilize uma estrutura orientada a objetos, esta classe funciona como um molde, concentrando atributos comuns a todos os produtos da loja, como preço, adicionais, comentários e categoria.
+
+7 - Subclasses: São as classes filhas de ItensEspecificos e representam os produtos reais do cardápio. Através do conceito de herança, elas herdam automaticamente os atributos da classe pai (como o preço), evitando redundância de código. Elas armazenam apenas o que é exclusivo de cada tipo, como: `Pizzas`, `Sanduíches`, `Sucos`, `Refrigerantes`, `Hambúrgueres` `Artesanais`, `Vitaminas` e `Porções`.
 
 #### Os Relacionamentos
 
