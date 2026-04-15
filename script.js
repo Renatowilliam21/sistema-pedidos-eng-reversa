@@ -1,28 +1,84 @@
-let itens = [];
-let total = 0;
+class PedidoSingleton {
+  constructor() {
+    if (!PedidoSingleton.instance) {
+      this.pedido = new Pedido();
+      PedidoSingleton.instance = this;
+    }
+
+    return PedidoSingleton.instance;
+  }
+
+  getPedido() {
+    return this.pedido;
+  }
+}
+class ProdutoFactory {
+  static criarProduto(nome) {
+    const precos = {
+      pastel: 5,
+      caldo: 7,
+      refrigerante: 4,
+      suco: 6
+    };
+
+    return new Produto(nome, precos[nome]);
+  }
+}
+class Produto{
+  constructor(nome, preco) {
+    this.nome = nome;
+    this.preco = preco;
+  }
+}
+class ItemPedido {
+  constructor(produto, qtd) {
+    this.produto = produto;
+    this.qtd = qtd;
+  }
+
+  getSubtotal() {
+    return this.produto.preco * this.qtd;
+  }
+}
+class Pedido {
+  constructor() {
+    this.itens = [];
+  }
+
+  adicionarItem(item) {
+    this.itens.push(item);
+  }
+
+  calcularTotal() {
+    let total = 0;
+
+    for (let i = 0; i < this.itens.length; i++) {
+      total += this.itens[i].getSubtotal();
+    }
+
+    return total;
+  }
+}
+
+const pedidoInstance = new PedidoSingleton();
+let pedido = pedidoInstance.getPedido();
+let total  = 0;
+
+
 
 function adicionar() {
   let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
+  let qtd = parseInt(document.getElementById("qtd").value);
 
   if (qtd == "" || qtd <= 0) {
     alert("Quantidade inválida");
+    return;
   }
 
-  let preco = 0;
+  let produtoObj = ProdutoFactory.criarProduto(produto);
 
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
-
-  let subtotal = preco * qtd;
-
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
+  let item = new ItemPedido(produtoObj, qtd);
+  pedido.adicionarItem(item);
 
   atualizarLista();
 }
@@ -31,18 +87,16 @@ function atualizarLista() {
   let lista = document.getElementById("lista");
   lista.innerHTML = "";
 
-  total = 0;
+  for (let i = 0; i < pedido.itens.length; i++) {
+  let item = pedido.itens[i];
+  
+  let li = document.createElement("li");
+  li.innerHTML = item.produto.nome + " | Qtd: " + item.qtd + " | R$ " + item.getSubtotal();
 
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
+  lista.appendChild(li);
+}
 
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
-    lista.appendChild(li);
-
-    total = total + item.subtotal;
-  }
+total = pedido.calcularTotal();
 
   document.getElementById("total").innerText = total;
 
@@ -75,7 +129,7 @@ function finalizar() {
 }
 
 function limparTudo() {
-  itens = [];
+  pedido.itens = [];
   total = 0;
 
   document.getElementById("lista").innerHTML = "";
@@ -83,17 +137,11 @@ function limparTudo() {
 }
 
 function removerUltimo() {
-  itens.pop();
+  pedido.itens.pop();
   atualizarLista();
 }
 
 // função duplicada de cálculo (problema proposital)
 function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
-  }
-
-  return soma;
+  return pedido.calcularTotal();
 }
