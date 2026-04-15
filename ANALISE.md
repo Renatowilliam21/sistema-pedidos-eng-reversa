@@ -1,6 +1,6 @@
 # Análise do Sistema de Pedidos – Pastelaria do Zé
 
----
+## Melhorias propostas
 
 ## Parte 1 – Compreensão do Sistema
 
