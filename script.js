@@ -1,99 +1,135 @@
-let itens = [];
-let total = 0;
+/**
+ * PADRÃO FACTORY: Responsável pela criação de objetos de produtos.
+ * Isola a lógica de atribuição de preços, facilitando a manutenção.
+ */
+class ProdutoFactory {
+    static criarProduto(tipo) {
+        const tabelaPrecos = {
+            'pastel': 5.00,
+            'caldo': 7.00,
+            'refrigerante': 4.00,
+            'suco': 6.00
+        };
+
+        const preco = tabelaPrecos[tipo] || 0;
+        
+        return {
+            nome: tipo.charAt(0).toUpperCase() + tipo.slice(1),
+            preco: preco
+        };
+    }
+}
+
+/**
+ * PADRÃO SINGLETON: Gerencia o estado único do pedido/carrinho.
+ * Centraliza o processamento de dados e cálculos de negócio.
+ */
+class CarrinhoManager {
+    constructor() {
+        if (CarrinhoManager.instance) {
+            return CarrinhoManager.instance;
+        }
+        this.itens = [];
+        this.total = 0;
+        CarrinhoManager.instance = this;
+    }
+
+    adicionarItem(tipo, quantidade) {
+        const produtoBase = ProdutoFactory.criarProduto(tipo);
+        const subtotal = produtoBase.preco * quantidade;
+
+        const novoItem = {
+            ...produtoBase,
+            quantidade: quantidade,
+            subtotal: subtotal
+        };
+
+        this.itens.push(novoItem);
+        this.calcularTotalGeral();
+    }
+
+    calcularTotalGeral() {
+        this.total = this.itens.reduce((acumulador, item) => acumulador + item.subtotal, 0);
+    }
+
+    limpar() {
+        this.itens = [];
+        this.total = 0;
+    }
+}
+
+// Instância única do controlador de dados
+const carrinho = new CarrinhoManager();
+
+/**
+ * FUNÇÕES DE INTERFACE (UI)
+ * Separam a manipulação do HTML da lógica de negócio.
+ */
 
 function adicionar() {
-  let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
+    const produtoSelect = document.getElementById("produto").value;
+    const qtdInput = document.getElementById("qtd").value;
+    const quantidade = parseInt(qtdInput);
 
-  if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
-  }
+    if (isNaN(quantidade) || quantidade <= 0) {
+        alert("Por favor, insira uma quantidade válida.");
+        return;
+    }
 
-  let preco = 0;
-
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
-
-  let subtotal = preco * qtd;
-
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
-
-  atualizarLista();
+    // Delega a criação e cálculo para o Manager
+    carrinho.adicionarItem(produtoSelect, quantidade);
+    
+    atualizarInterface();
 }
 
-function atualizarLista() {
-  let lista = document.getElementById("lista");
-  lista.innerHTML = "";
+function atualizarInterface() {
+    const listaUI = document.getElementById("lista");
+    const totalUI = document.getElementById("total");
+    
+    listaUI.innerHTML = "";
 
-  total = 0;
+    carrinho.itens.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.nome} | Qtd: ${item.quantidade} | R$ ${item.subtotal.toFixed(2)}`;
+        listaUI.appendChild(li);
+    });
 
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
-
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
-    lista.appendChild(li);
-
-    total = total + item.subtotal;
-  }
-
-  document.getElementById("total").innerText = total;
-
-  salvarTotal();
-}
-
-function salvarTotal() {
-  // duplicação de responsabilidade
-  localStorage.setItem("total", total);
+    totalUI.innerText = carrinho.total.toFixed(2);
 }
 
 function finalizar() {
-  let desconto = 0;
+    if (carrinho.itens.length === 0) {
+        alert("O carrinho está vazio!");
+        return;
+    }
 
-  if (total > 100) {
-    desconto = total * 0.2;
-  } else if (total > 50) {
-    desconto = total * 0.1;
-  }
+    const total = carrinho.total;
+    let desconto = 0;
 
-  let taxa = total * 0.05;
+    // Regras de negócio de desconto
+    if (total > 100) {
+        desconto = total * 0.20;
+    } else if (total > 50) {
+        desconto = total * 0.10;
+    }
 
-  let totalFinal = total - desconto + taxa;
+    const taxaEntrega = total * 0.05;
+    const valorFinal = total - desconto + taxaEntrega;
 
-  alert("Total final: " + totalFinal);
+    alert(`Resumo do Pedido:
+    Subtotal: R$ ${total.toFixed(2)}
+    Desconto: R$ ${desconto.toFixed(2)}
+    Taxa (5%): R$ ${taxaEntrega.toFixed(2)}
+    -------------------------
+    TOTAL FINAL: R$ ${valorFinal.toFixed(2)}`);
 
-  localStorage.setItem("ultimoPedido", totalFinal);
-
-  limparTudo();
+    localStorage.setItem("ultimoPedido", valorFinal.toFixed(2));
+    
+    limparTudo();
 }
 
 function limparTudo() {
-  itens = [];
-  total = 0;
-
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
-}
-
-function removerUltimo() {
-  itens.pop();
-  atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
-  }
-
-  return soma;
+    carrinho.limpar();
+    atualizarInterface();
+    document.getElementById("qtd").value = "";
 }
