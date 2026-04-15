@@ -17,3 +17,9 @@ A prioridade deve ser a reestruturação do código para uma arquitetura em cama
 ---
 
 ### Parte 10 – Reflexão Crítica
+
+10.1 - Sim. Através da lógica de negócio e do uso de ferramentas adequadas, é perfeitamente possível realizar a modelagem de um sistema. Contudo, vale ressaltar que, mesmo com todos os recursos disponíveis, uma análise feita sem acesso ao código-fonte será sempre incompleta. Ainda assim, ela é capaz de fornecer uma representação muito fiel ao produto original e ao seu funcionamento esperado.
+
+10.2 - A modelagem é fundamental para a compreensão macro de um sistema e para o aperfeiçoamento de nossas próprias habilidades técnicas. Ela nos permite visualizar, analisar e projetar arquiteturas e designs de software mais robustos, facilitando a tomada de decisões antes mesmo da implementação ou durante um processo de refatoração.
+
+10.3 - Existem diversas diferenças, mas o maior destaque está no processo de desenvolvimento e execução. Um projeto real envolve uma complexidade de processos que muitas vezes não são viáveis em um ambiente didático, como a coleta de requisitos do mundo real, o tratamento de dados legados e restrições de infraestrutura. Por isso, o estudo de casos reais é essencial: ele permite o entendimento prático de pilares como Arquitetura de Dados, Programação Orientada a Objetos e Engenharia de Software em cenários de alta demanda.
