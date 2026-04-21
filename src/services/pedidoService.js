@@ -1,0 +1,15 @@
+export class PedidoService {
+  calcularTotal(itens) {
+    return itens.reduce((soma, item) => soma + item.subtotal, 0);
+  }
+
+  calcularDesconto(total) {
+    if (total > 100) return total * 0.2;
+    if (total > 50) return total * 0.1;
+    return 0;
+  }
+
+  calcularTaxa(total) {
+    return total * 0.05;
+  }
+}
