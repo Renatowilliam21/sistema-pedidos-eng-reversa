@@ -24,16 +24,27 @@ export class PedidoController {
     this.view.limparFormulario();
   }
 
-  finalizar() {
+  async finalizar() {
     const total = this.service.calcularTotal(this.itens);
     const desconto = this.service.calcularDesconto(total);
     const taxa = this.service.calcularTaxa(total);
     const totalFinal = total - desconto + taxa;
 
-    this.repository.salvar(totalFinal);
-    this.view.mostrarMensagem(`Total final: R$ ${totalFinal.toFixed(2)}`);
-    
-    this.itens = [];
-    this.view.atualizarLista(this.itens, 0);
+    const dadosPedido = {
+    itens: this.itens,
+    totalOriginal: total,
+    desconto: desconto,
+    totalPago: totalFinal,
+    data: new Date().toISOString()
+  };
+
+ 
+  await this.repository.salvar(dadosPedido);
+  
+  this.view.mostrarMensagem(`Pedido enviado ao servidor! Total: R$ ${totalFinal.toFixed(2)}`);
+  
+
+  this.itens = [];
+  this.view.atualizarLista(this.itens, 0);
   }
 }
