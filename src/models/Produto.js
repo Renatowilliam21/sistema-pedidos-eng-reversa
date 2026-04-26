@@ -14,7 +14,6 @@ class Produtos {
       "suco": 6
     };
     
-    // Transforma para minúsculo de forma segura
     const nomeFormatado = nomeProduto ? String(nomeProduto).toLowerCase().trim() : "";
     const preco = precos[nomeFormatado] || 0; 
     

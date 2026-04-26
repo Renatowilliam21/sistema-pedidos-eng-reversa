@@ -1,5 +1,4 @@
 class CarrinhoView {
-  // O Carrinho vai chamar essa função toda vez que um item for adicionado ou removido
   static atualizarTela(carrinho) {
     let lista = document.getElementById("lista");
     lista.innerHTML = "";
@@ -13,7 +12,6 @@ class CarrinhoView {
 
     document.getElementById("total").innerText = carrinho.total.toFixed(2);
     
-    // Mostra ou esconde a lista dependendo se tem itens
     if (carrinho.itens.length > 0) {
       document.getElementById("remover").style.display = "flex";
       document.getElementById("lista1").style.display = "block";

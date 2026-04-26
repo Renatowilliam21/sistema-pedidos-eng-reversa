@@ -1,6 +1,5 @@
 class Carrinho {
   constructor() {
-    // 1. Padrão Singleton: Garante que só exista um carrinho no sistema
     if(Carrinho.instance) {
       return Carrinho.instance
     }
@@ -19,7 +18,6 @@ class Carrinho {
   }
   
   notificarObservers() {
-    // Avisa todos os ouvintes (ex: a View) que o carrinho mudou
     this.observers.forEach(observer => observer.atualizarTela(this))
   }
 
