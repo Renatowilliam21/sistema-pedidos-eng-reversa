@@ -3,38 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <title>Pastelaria do Zé</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+<header class="cabecalho">
+      <h1>Pastelaria do Zé</h1>
+    </header>
+    <main class="principal">
+
 
 <div class="container">
-  <h1>🍴 Sistema de Pedidos</h1>
+    
 
-  <div class="form">
-    <select id="produto">
-      <option value="pastel">Pastel</option>
-      <option value="caldo">Caldo</option>
-      <option value="refrigerante">Refrigerante</option>
-      <option value="suco">Suco</option>
-    </select>
+    
+    <div id="tela-pedido">
+        <h2>Sistema de Pedidos</h2>
+        
+        <div class="form">
+            <select id="produto">
+                <option value="pastel">Pastel</option>
+                <option value="caldo">Caldo de Cana</option>
+            </select>
+            <input type="number" id="qtd" placeholder="Quantidade">
+            
+            <button onclick="adicionar()">Adicionar</button>
+            
+        </div>
 
-    <input type="number" id="qtd" placeholder="Quantidade">
+        <div class="lista">
+            <h2>Itens</h2>
+            <ul id="lista"></ul>
+        </div>
 
-    <button onclick="adicionar()">Adicionar</button>
-    <button onclick="finalizar()">Finalizar Pedido</button>
-  </div>
+        <div class="total">
+            <h2>Total: R$ <span id="total">0</span></h2>
+        </div>
+        <button id="btn-finalizar" onclick="finalizar()" style="display: none;">Finalizar Pedido</button>
+    </div>
 
-  <div class="lista">
-    <h2>Itens</h2>
-    <ul id="lista"></ul>
-  </div>
+    <div id="tela-checkout" style="display: none;">
+        <h1>Resumo do Pedido</h1>
+        
+        <div class="form">
+            <p>Total a pagar: <strong>R$ <span id="checkout-total">0</span></strong></p>
+            
+            <input type="text" id="cliente-nome" placeholder="Seu Nome completo">
+            <input type="tel" id="cliente-fone" placeholder="WhatsApp (ex: 85999999999)">
+            
+            <button onclick="enviarParaWhatsApp()" style="background-color: #25D366;">
+                Enviar para o WhatsApp 
+            </button>
+            
+            <button onclick="voltarParaPedido()" style="background-color: #666;">
+                Voltar e Editar Pedido
+            </button>
+        </div>
+    </div>
 
-  <div class="total">
-    <h2>Total: R$ <span id="total">0</span></h2>
-  </div>
 </div>
+ 
+</main>
 
-<script src="script.js"></script>
+<footer class="rodape">
+  <h4>Desenvolvido por: Fernando Everson F. Cavalcante</h4>
+</footer>
+<script type="module" src="./script.js"></script>
 
 </body>
 </html>
