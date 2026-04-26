@@ -6,11 +6,18 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+<header class="cabecalho">
+      <h1>Pastelaria do Zé</h1>
+    </header>
+    <main class="principal">
+
 
 <div class="container">
     
+
+    
     <div id="tela-pedido">
-        <h1>Sistema de Pedidos</h1>
+        <h2>Sistema de Pedidos</h2>
         
         <div class="form">
             <select id="produto">
@@ -20,7 +27,7 @@
             <input type="number" id="qtd" placeholder="Quantidade">
             
             <button onclick="adicionar()">Adicionar</button>
-            <button onclick="finalizar()">Finalizar Pedido</button>
+            
         </div>
 
         <div class="lista">
@@ -31,6 +38,7 @@
         <div class="total">
             <h2>Total: R$ <span id="total">0</span></h2>
         </div>
+        <button id="btn-finalizar" onclick="finalizar()" style="display: none;">Finalizar Pedido</button>
     </div>
 
     <div id="tela-checkout" style="display: none;">
@@ -43,7 +51,7 @@
             <input type="tel" id="cliente-fone" placeholder="WhatsApp (ex: 85999999999)">
             
             <button onclick="enviarParaWhatsApp()" style="background-color: #25D366;">
-                Enviar para o WhatsApp 🚀
+                Enviar para o WhatsApp 
             </button>
             
             <button onclick="voltarParaPedido()" style="background-color: #666;">
@@ -54,7 +62,11 @@
 
 </div>
  
+</main>
 
+<footer class="rodape">
+  <h4>Desenvolvido por: Fernando Everson F. Cavalcante</h4>
+</footer>
 <script type="module" src="./script.js"></script>
 
 </body>

@@ -1,6 +1,29 @@
+*{
+  padding: 0;
+  margin: 0;
+}
 body {
   font-family: Arial;
   background: #f4f4f4;
+  margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+}
+.cabecalho{
+  background-color: #28a745;
+  padding: 15px;
+  color: white;
+
+  margin-bottom: 3rem;
+}
+.rodape{
+  background-color: #28a745;
+  padding: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+
 }
 
 .container {
@@ -27,6 +50,10 @@ button {
   border: none;
   padding: 10px;
   cursor: pointer;
+
+}
+main{
+  flex: 1;
 }
 
 button:hover {
@@ -42,4 +69,88 @@ button:hover {
   background: #eee;
   margin: 5px 0;
   padding: 5px;
+}
+
+#lista li {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #f9f9f9;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.btn-remover{
+  border-radius: 5%;
+
+}
+#btn-finalizar {
+    display: none; 
+    width: 100%;          
+    max-width: 400px;     
+    margin: 20px auto 0;   
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+button[onclick="adicionar()"], 
+#btn-finalizar {
+    display: block;        
+    width: 100%;          
+    max-width: 100%;       
+    margin: 15px auto;    
+    padding: 12px;         
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;    
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#tela-checkout button {
+    border-radius: 8px;      
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;   
+    transition: filter 0.2s; 
+}
+
+
+.btn-whatsapp, 
+button[onclick="enviarParaWhatsApp()"] {
+    background-color: #28a745 !important; 
+    color: white;
+}
+
+
+button[onclick="voltarParaPedido()"] {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+#tela-checkout button:hover {
+    filter: brightness(0.9);
+}
+
+
+#tela-checkout input {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    box-sizing: border-box; 
 }

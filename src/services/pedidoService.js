@@ -14,8 +14,8 @@ export class PedidoService {
   }
 
 gerarLinkWhatsApp(nome, fone, itens, total) {
-  let mensagem = `Olá, meu nome é ${nome}!\n\n`;
-  mensagem += `*Resumo do meu Pedido:*\n`;
+  let mensagem = `Olá, ${nome}!\n\n`;
+  mensagem += `*Resumo do seu Pedido:*\n`;
   
   itens.forEach(item => {
     mensagem += `- ${item.produto.nome} (x${item.qtd}): R$ ${item.subtotal}\n`;
