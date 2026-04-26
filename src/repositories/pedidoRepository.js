@@ -19,4 +19,10 @@ export class PedidoRepository {
       console.error("Erro ao conectar com o JSON Server:", erro);
     }
   }
+
+  async excluirPedido(id) {
+  await fetch(`${this.url}/${id}`, {
+    method: 'DELETE'
+  });
+}
 }

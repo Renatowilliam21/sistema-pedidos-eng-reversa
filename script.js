@@ -12,3 +12,10 @@ window.adicionar = () => {
 window.finalizar = () => {
   controller.finalizar();
 };
+
+window.removerItem = (index) => {
+  controller.removerItem(index);
+};
+
+window.enviarParaWhatsApp = () => controller.enviarWhatsApp();
+window.voltarParaPedido = () => view.voltarParaPedido();

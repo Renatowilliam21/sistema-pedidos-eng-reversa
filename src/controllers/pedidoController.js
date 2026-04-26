@@ -24,27 +24,48 @@ export class PedidoController {
     this.view.limparFormulario();
   }
 
-  async finalizar() {
+  finalizar() {
+    if (this.itens.length === 0) return this.view.mostrarMensagem("Sua lista está vazia!");
+
+    const total = this.service.calcularTotal(this.itens);
+    // Em vez de salvar agora, vamos apenas mostrar a tela de checkout
+    this.view.exibirCheckout(total);
+}
+
+// 2. Novo método para quando ele clicar no botão final do WhatsApp
+async enviarWhatsApp() {
+    const { nome, fone } = this.view.obterDadosCheckout();
+    
+    if (!nome || !fone) {
+        return this.view.mostrarMensagem("Preencha nome e telefone, por favor!");
+    }
+
     const total = this.service.calcularTotal(this.itens);
     const desconto = this.service.calcularDesconto(total);
     const taxa = this.service.calcularTaxa(total);
     const totalFinal = total - desconto + taxa;
 
+    // Gerar o link do WhatsApp usando o Service
+    const link = this.service.gerarLinkWhatsApp(nome, fone, this.itens, totalFinal);
+
+    // Salvar no JSON Server (Sua lógica de banco fake que você já tinha)
     const dadosPedido = {
-    itens: this.itens,
-    totalOriginal: total,
-    desconto: desconto,
-    totalPago: totalFinal,
-    data: new Date().toISOString()
-  };
+        cliente: nome,
+        whatsapp: fone,
+        itens: this.itens,
+        totalPago: totalFinal,
+        data: new Date().toISOString()
+    };
 
- 
-  await this.repository.salvar(dadosPedido);
-  
-  this.view.mostrarMensagem(`Pedido enviado ao servidor! Total: R$ ${totalFinal.toFixed(2)}`);
-  
+    await this.repository.salvar(dadosPedido);
+    
+    // Abrir o WhatsApp
+    window.open(link, "_blank");
 
-  this.itens = [];
-  this.view.atualizarLista(this.itens, 0);
-  }
+    // Limpar o sistema para o próximo
+    this.itens = [];
+    this.view.atualizarLista(this.itens, 0);
+    this.view.voltarParaPedido(); // Volta a tela inicial
+    this.view.mostrarMensagem("Pedido finalizado com sucesso!");
+}
 }
