@@ -12,7 +12,6 @@ class PedidoController {
 
     try {
       await PedidoRepository.salvar(novoPedido);
-      CarrinhoView.exibirAlerta("✅ Pedido salvo com sucesso na base de dados!");
 
       const numeroPastelaria = "5588981301074";
       WhatsAppService.enviarResumo(novoPedido, numeroPastelaria);
@@ -23,7 +22,7 @@ class PedidoController {
 
     } catch (erro) {
       console.error(erro);
-      CarrinhoView.exibirAlerta("❌ O servidor (JSON Server) não está a rodar. Ligue o servidor no terminal.");
+      CarrinhoView.exibirAlerta("O servidor não está a rodando. Ligue o servidor no terminal.");
     }
   }
 }
