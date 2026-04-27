@@ -1,99 +1,49 @@
-let itens = [];
-let total = 0;
+const carrinho = new Carrinho()
+carrinho.adicionarObserver(CarrinhoView)
 
-function adicionar() {
-  let produto = document.getElementById("produto").value;
-  let qtd = document.getElementById("qtd").value;
-
-  if (qtd == "" || qtd <= 0) {
-    alert("Quantidade inválida");
+function adicionar(nome_produto, opcao) {
+  let input = opcao.parentElement.querySelector('input')
+  let qtd = Number(input.value)
+  
+  if(qtd <= 0 || qtd == "") {
+    alert("Escolha uma quantidade válida")
+    return
   }
 
-  let preco = 0;
+  carrinho.adicionarItem(nome_produto, qtd)
 
-  if (produto == "pastel") preco = 5;
-  if (produto == "caldo") preco = 7;
-  if (produto == "refrigerante") preco = 4;
-  if (produto == "suco") preco = 6;
-
-  let subtotal = preco * qtd;
-
-  itens.push({
-    produto: produto,
-    qtd: qtd,
-    subtotal: subtotal
-  });
-
-  atualizarLista();
+  input.value = ""
 }
 
-function atualizarLista() {
-  let lista = document.getElementById("lista");
-  lista.innerHTML = "";
+function validarCupom() {
+  const input = document.getElementById("text")
+  const msg = document.getElementById("mensagem")
+  const codigo = document.getElementById("text").value.toUpperCase().trim()
 
-  total = 0;
+  console.log("Tentando cupom:", codigo)
 
-  for (let i = 0; i < itens.length; i++) {
-    let item = itens[i];
-
-    let li = document.createElement("li");
-    li.innerHTML = item.produto + " | Qtd: " + item.qtd + " | R$ " + item.subtotal;
-
-    lista.appendChild(li);
-
-    total = total + item.subtotal;
+  const cuponsValidos = {
+    "CUPOM10": new DescontoPercentual(10),
+    "CUPOM5": new DescontoPercentual(5),
   }
 
-  document.getElementById("total").innerText = total;
-
-  salvarTotal();
-}
-
-function salvarTotal() {
-  // duplicação de responsabilidade
-  localStorage.setItem("total", total);
-}
-
-function finalizar() {
-  let desconto = 0;
-
-  if (total > 100) {
-    desconto = total * 0.2;
-  } else if (total > 50) {
-    desconto = total * 0.1;
+  if(cuponsValidos[codigo]) {
+    carrinho.aplicarDesconto(cuponsValidos[codigo])
+    msg.style.display = "flex"
+    msg.innerText = "Cupom aplicado!"
+    msg.style.color = "green"
+  } else {
+    carrinho.aplicarDesconto(new SemDesconto())
+    msg.style.display = "flex"
+    msg.innerText = "Cupom inválido"
+    msg.style.color = "red"
   }
+}
 
-  let taxa = total * 0.05;
-
-  let totalFinal = total - desconto + taxa;
-
-  alert("Total final: " + totalFinal);
-
-  localStorage.setItem("ultimoPedido", totalFinal);
-
-  limparTudo();
+function remover(produto) {
+  carrinho.removerItemEspecifico(produto)
 }
 
 function limparTudo() {
-  itens = [];
-  total = 0;
-
-  document.getElementById("lista").innerHTML = "";
-  document.getElementById("total").innerText = 0;
-}
-
-function removerUltimo() {
-  itens.pop();
-  atualizarLista();
-}
-
-// função duplicada de cálculo (problema proposital)
-function calcularTotal() {
-  let soma = 0;
-
-  for (let i = 0; i < itens.length; i++) {
-    soma += itens[i].subtotal;
-  }
-
-  return soma;
+  carrinho.limparTudo()
 }
