@@ -2,26 +2,26 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Pastelaria do Zé</title>
+  <title>Tropykaly - Sistema de Pedidos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-  <h1>🍴 Sistema de Pedidos</h1>
+  <h1>🍕 Tropykaly - Sistema de Pedidos</h1>
 
   <div class="form">
     <select id="produto">
-      <option value="pastel">Pastel</option>
-      <option value="caldo">Caldo</option>
-      <option value="refrigerante">Refrigerante</option>
-      <option value="suco">Suco</option>
+      <option value="pizza">Pizza</option>
+      <option value="lanche">Lanche</option>
+      <option value="bebida">Bebida</option>
     </select>
 
     <input type="number" id="qtd" placeholder="Quantidade">
 
     <button onclick="adicionar()">Adicionar</button>
     <button onclick="finalizar()">Finalizar Pedido</button>
+    <button onclick="enviarWhatsApp()">Enviar WhatsApp</button>
   </div>
 
   <div class="lista">
@@ -30,7 +30,9 @@
   </div>
 
   <div class="total">
-    <h2>Total: R$ <span id="total">0</span></h2>
+    <h2>Subtotal: R$ <span id="total">0</span></h2>
+    <h2>Taxa de entrega: R$ <span id="taxa">5</span></h2>
+    <h2>Total: R$ <span id="totalFinal">5</span></h2>
   </div>
 </div>
 
