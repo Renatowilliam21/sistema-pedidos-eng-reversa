@@ -1,0 +1,167 @@
+{
+  "pedidos": [
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "8tGEQC76aGQ"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "lmakXjMXXp4"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "aQx-XyTRuP8"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "R-6iwvrgfFA"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "uM6jntvYAXk"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "tYl8IS01WDw"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "MAvsFpl57wo"
+    },
+    {
+      "totalOriginal": 5,
+      "desconto": 0,
+      "taxa": 0.25,
+      "totalFinal": 5.25,
+      "itens": [
+        {
+          "produto": {
+            "id": 1,
+            "nome": "Pastel",
+            "preco": 5
+          },
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "id": "rELiyP1Wamg"
+    },
+    {
+      "totalOriginal": 7,
+      "desconto": 0,
+      "taxa": 0.35000000000000003,
+      "totalFinal": 7.35,
+      "itens": [
+        {
+          "produto": {
+            "id": 2,
+            "nome": "Caldo",
+            "preco": 7
+          },
+          "quantidade": 1,
+          "subtotal": 7
+        }
+      ],
+      "id": "ny3HyCu7O-s"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
