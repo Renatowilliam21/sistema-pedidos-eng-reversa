@@ -1,0 +1,39 @@
+{
+  "pedidos": [
+    {
+      "itens": [
+        {
+          "produto": {
+            "id": "caldo",
+            "nome": "Caldo",
+            "preco": 7
+          },
+          "quantidade": 1
+        }
+      ],
+      "totalBruto": 7,
+      "desconto": 0,
+      "taxa": 0.35000000000000003,
+      "totalFinal": 7.35,
+      "id": "99LI3hoEadY"
+    },
+    {
+      "itens": [
+        {
+          "produto": {
+            "id": "caldo",
+            "nome": "Caldo",
+            "preco": 7
+          },
+          "quantidade": 1
+        }
+      ],
+      "totalBruto": 7,
+      "desconto": 0,
+      "taxa": 0.35000000000000003,
+      "totalFinal": 7.35,
+      "id": "JVmH4CpJNfo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
