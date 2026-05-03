@@ -1,0 +1,34 @@
+# Sistema / SO
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Dependências / builds
+node_modules/
+dist/
+build/
+vendor/
+
+# Ambiente
+.env
+
+# Cache / temporários
+tmp/
+cache/
+*.cache
+
+# Banco / arquivos locais
+*.sqlite
+*.db
+
+# Cobertura / testes
+coverage/
+.phpunit.result.cache
+
+# Dados dinâmicos / persistência
+Project/Backend/data/pedidos.json

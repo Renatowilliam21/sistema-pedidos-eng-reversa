@@ -1,79 +1,65 @@
-# Sistema de Pedidos - Engenharia Reversa
+# Sistema de Pedidos com Evolução Arquitetural
 
-## 🎓 Disciplina
-Arquitetura de Sistemas  
-**Professor:** Dr. Renato William Rodrigues de Souza  
-**Curso:** Análise e Desenvolvimento de Sistemas  
-**Instituição:** IFCE - Campus Boa Viagem  
+## Informações Acadêmicas
 
----
+- **Instituição:** IFCE - Campus Boa Viagem
+- **Disciplina:** Programação WEB I
+- **Professor:** Dr. Renato William Rodrigues de Souza
+- **Aluno:** João Paulo de Albuquerque Alves
+- **Curso:** Análise e Desenvolvimento de Sistemas
 
-## Sobre o Projeto
+## Tema
 
-Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
+Evolução Arquitetural, Backend em PHP e Deploy de Sistema
 
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
+## Objetivo
 
----
+Evoluir o sistema de pedidos, transformando-o em um sistema profissional com:
 
-## Objetivo da Atividade
+- Arquitetura em camadas
+- Programação orientada a objetos
+- Backend implementado em PHP
+- Integração com frontend
+- Aplicação de padrões de projeto
+- Deploy em ambiente de hospedagem
+- Containerização com Docker
 
-O objetivo é aplicar conceitos de:
+## Estrutura em Camadas
 
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
+```
+/backend
+├── /models          # Entidades de domínio
+├── /services        # Lógica de negócio
+├── /controllers     # Controle de requisições
+├── /repositories    # Acesso a dados
+└── /config          # Configurações
 
----
+/frontend
+├── /css             # Estilos
+├── /js              # Scripts cliente
+└── index.html       # Interface principal
+```
 
-## Desafio
+## Tecnologias Utilizadas
 
-Você deverá:
+- **Backend:** PHP 8.0+
+- **Frontend:** HTML5, CSS3, JavaScript (Fetch API)
+- **Persistência:** JSON / JSON Server
+- **Containerização:** Docker & Docker Compose
+- **Versionamento:** Git
+- **Deploy:** Hospedagem gratuita (a definir)
 
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
+## Status do Projeto
 
----
+Projeto em desenvolvimento na branch `atividade_03`
 
-## O que analisar
+## Critérios de Avaliação
 
-Durante a análise, identifique problemas relacionados a:
-
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
-
----
-
-## Implementações obrigatórias
-
-Você deve aplicar no sistema:
-
-### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
-
-### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
-
----
-
-## Como executar o projeto
-
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
-
----
-
-## 💻 Como clonar o repositório
-
-```bash
-git clone LINK_DO_REPOSITORIO
+- Arquitetura: 2,0 pontos
+- Padrões de Projeto: 2,0 pontos
+- Backend PHP: 1,5 pontos
+- Integração: 1,0 ponto
+- Deploy: 1,0 ponto
+- Docker: 1,5 pontos
+- Código: 0,5 pontos
+- Justificativa: 0,5 pontos
