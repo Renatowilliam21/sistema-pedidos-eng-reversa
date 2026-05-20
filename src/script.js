@@ -1,4 +1,4 @@
-import { Pedido } from "./pedido.js";
+import { Pedido } from "../pedido.js";
 
 const pedido = new Pedido();
 
