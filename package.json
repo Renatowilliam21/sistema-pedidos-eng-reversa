@@ -1,0 +1,25 @@
+{
+  "name": "sistema-pedidos-eng-reversa",
+  "version": "1.0.0",
+  "description": "Arquitetura de Sistemas   **Professor:** Dr. Renato William Rodrigues de Souza   **Curso:** Análise e Desenvolvimento de Sistemas   **Instituição:** IFCE - Campus Boa Viagem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "json-server --watch db.json --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fernando-Ferreira-Cavalcante/sistema-pedidos-eng-reversa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fernando-Ferreira-Cavalcante/sistema-pedidos-eng-reversa/issues"
+  },
+  "homepage": "https://github.com/Fernando-Ferreira-Cavalcante/sistema-pedidos-eng-reversa#readme",
+  "devDependencies": {
+    "json-server": "^1.0.0-beta.15"
+  }
+}
