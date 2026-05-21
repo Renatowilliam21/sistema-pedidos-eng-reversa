@@ -10,31 +10,74 @@
 <div class="container">
   <h1>🍴 Sistema de Pedidos</h1>
 
-  <div class="form">
-    <select id="produto">
-      <option value="pastel">Pastel</option>
-      <option value="caldo">Caldo</option>
-      <option value="refrigerante">Refrigerante</option>
-      <option value="suco">Suco</option>
-    </select>
+  <div class="Produtos">
+    <div class="pastel">
+      <img src="style/Pastel-de-feira-caseiro-1200x692.jpg" alt="">
+      <input type="number" id="qtd" placeholder="Quantidade">
+      <button onclick="adicionar('pastel', this)">Adicionar ao carrinho</button>
+    </div>
 
-    <input type="number" id="qtd" placeholder="Quantidade">
+    <div class="Caldo">
+      <img src="style/caldo-de-kenga-simples.webp" alt="">
+      <input type="number" id="qtd" placeholder="Quantidade">
+      <button onclick="adicionar('caldo', this)">Adicionar ao carrinho</button>
+    </div>
 
-    <button onclick="adicionar()">Adicionar</button>
-    <button onclick="finalizar()">Finalizar Pedido</button>
+    <div class="Refrigerante">
+      <img src="style/images.jpeg" alt="">
+      <input type="number" id="qtd" placeholder="Quantidade">
+      <button onclick="adicionar('refrigerante', this)">Adicionar ao carrinho</button>
+    </div>
+
+    <div class="Suco">
+      <img src="style/suco-laranja-freepik-800x533.webp" alt="">
+      <input type="number" id="qtd" placeholder="Quantidade">
+      <button onclick="adicionar('suco', this)">Adicionar ao carrinho</button>
+    </div>
   </div>
 
-  <div class="lista">
+  <div class="Carrinho">
+  <div id="lista1" class="lista">
     <h2>Itens</h2>
     <ul id="lista"></ul>
   </div>
+  </div>
+  <div id="remover">
+  <button id="limparTudo" onclick="limparTudo()">Limpar Carrinho</button>
+  </div>
 
+<div class="FinalizarCompra">
   <div class="total">
     <h2>Total: R$ <span id="total">0</span></h2>
   </div>
+
+  <div class="cupom">
+    <div id="inputs">
+      <input id="text" class="text" type="text" placeholder="CUPOM10: 10% OFF">
+      <button type="button" onclick="validarCupom()">Aplicar cupom</button>
+    </div>
+    <p id="mensagem"></p>
+  </div>
+    <button onclick="PedidoController.finalizarPedido(carrinho)">Finalizar Pedido</button>
+</div>
 </div>
 
-<script src="script.js"></script>
 
+<script src="src/models/Pedido.js"></script>
+<script src="src/models/Produto.js"></script>
+<script src="src/models/ItemPedido.js"></script>
+<script src="src/models/Carrinho.js"></script>
+
+<script src="src/services/WhatsappService.js"></script>
+<script src="src/services/DescontoService.js"></script>
+<script src="src/services/PedidoService.js"></script>
+
+<script src="src/views/PedidoView.js"></script>
+
+<script src="src/repositories/PedidoRepository.js"></script>
+
+<script src="src/controllers/PedidoController.js"></script>
+
+<script src="script.js"></script>
 </body>
 </html>
