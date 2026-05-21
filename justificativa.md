@@ -1,37 +1,27 @@
-1. Quais problemas foram resolvidos?
+1. O MVC melhorou a organização?
 
-    Inicialmente, o sistema sofria com o acoplamento excessivo, onde a lógica de cálculo, a manipulação do HTML (DOM) e o envio de dados estavam misturados. Isso gerava erros como:
+   Sim, drasticamente! A transição para o MVC permitiu reorganizar completamente o sistema em uma estrutura clara de pastas (/models, /views, /controllers, /services, /repositories). Antes, tínhamos uma "salada" de código; agora, cada camada tem o seu papel definido: Models cuidam da estrutura de dados , Views focam apenas na interface , e Controllers atuam no controle do fluxo.
 
-    Sincronização falha: A tela não atualizava corretamente quando os dados mudavam.
+2. O sistema ficou mais desacoplado?
 
-    Falta de persistência: Os dados se perdiam ao atualizar a página, pois não havia integração com servidores ou armazenamento local.
+    Completamente. Com a nova arquitetura, garantimos que as Views não acessam dados diretamente nem realizam cálculos. Os Controllers também ficaram mais enxutos, pois não acessam o banco de dados diretamente nem guardam regras de negócio complexas. A aplicação de padrões como o Observer garantiu que o Carrinho (Model) não precise saber que a Tela (View) existe para atualizá-la.
 
-2. Como a arquitetura melhorou o sistema?
+3. Onde ainda existem problemas?
 
-    Em geral o sistema ficou bem mais pólido e funcional
+    Mesmo com o MVC, em projetos que escalam rapidamente, começam a surgir problemas como "controllers gordos" e um inevitável excesso de responsabilidades. O Controller pode acabar virando um "faz-tudo" que orquestra dezenas de instâncias diferentes, gerando dificuldade de manutenção e de navegação no código.
 
-    Model: Isolou a regra de negócio (preços, itens e descontos), garantindo que o "cérebro" do sistema seja independente da interface.
+4. O MVC seria suficiente para um sistema muito grande?
 
-    View: Ficou responsável apenas por renderizar os dados, facilitando mudanças no design sem quebrar a lógica.
+    Provavelmente não. O documento destaca que, para sistemas que crescem muito, o MVC tradicional apresenta problemas como aumento do acoplamento e dificuldade de escalabilidade. Para aplicações de nível corporativo (Enterprise), seria necessário evoluir para Clean Architecture, Arquitetura Hexagonal ou até mesmo Microsserviços.
 
-    Controller: Atuou como o maestro, gerenciando o fluxo de entrada do usuário e acionando as classes necessárias (serviços e repositórios).
+5. Quais limitações você percebeu?
 
-3. Onde os padrões foram aplicados?
+    A principal limitação prática é a linha tênue entre o que vai para o Model, o que vai para o Service e o que fica no Controller. Se não houver uma disciplina rigorosa, é muito fácil cair no anti-padrão de colocar regras de negócio espalhadas ou criar dependências pesadas, dificultando a escalabilidade.
 
-    Singleton: Aplicado no Carrinho.js para garantir que exista apenas uma instância do carrinho em toda a aplicação, evitando duplicação de pedidos.
+6. Onde services ajudaram?
 
-    Observer: Utilizado para atualizar a interface automaticamente sempre que o estado do carrinho muda, eliminando a necessidade de atualizar o HTML manualmente em cada função.
+    Os Services foram os verdadeiros heróis para limpar os Controllers. Eles assumiram a responsabilidade total pelas regras de negócio, cálculos (como o DescontoService), validações e aplicação de estratégias . Eles também isolaram integrações externas, como o WhatsAppService.
 
-    Repository: Implementado no PedidoRepository.js para abstrair a comunicação com a API (JSON Server), separando o "como salvar" do "o que salvar".
+7. Onde repositories ajudaram?
 
-    Strategy: Aplicado na lógica de descontos, permitindo que novas regras (fixas ou percentuais) sejam criadas sem alterar o código principal do carrinho.
-
-    Service: Usado no WhatsAppService.js para isolar integrações externas de terceiros.
-
-4. Quais beneficios foram obtidos?
-
-    Manutenibilidade: O código ficou modular. Se o preço do pastel mudar ou a API trocar de endereço, sabemos exatamente em qual arquivo mexer.
-
-    Escalabilidade: É fácil adicionar novas funcionalidades (ex: novos cupons de desconto ou um sistema de login) sem risco de efeitos colaterais em outras partes do sistema.
-
-    Profissionalismo: O uso dessas práticas eleva o nível do projeto de um simples script para um software robusto seguindo padrões de engenharia reversa e moderna.
+    Os Repositories foram fundamentais para isolar a camada de persistência e a comunicação com o JSON Server. Eles blindaram o restante do sistema: o Controller não faz ideia se os dados estão sendo salvos em um arquivo de texto, em um db.json ou em um banco de dados na nuvem; ele apenas delega o acesso aos dados ao Repository.
