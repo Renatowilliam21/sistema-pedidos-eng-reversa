@@ -13,6 +13,7 @@ class Carrinho {
     Carrinho.instance = this
   }
   
+  // PADRÃO DE PROJETO OBSERVER
   adicionarObserver(observer) {
     this.observers.push(observer)
   }
@@ -37,24 +38,26 @@ class Carrinho {
 
   // LÓGICA DO CARRINHO
   adicionarItem(nomeProduto, qtd) {
-    const produto = Produtos.criar(nomeProduto)
-    const subtotal = produto.preco * qtd
+    const tabelaPrecos = {
+      'pastel': 5.00,
+      'caldo': 8.00,
+      'refrigerante': 5.00,
+      'suco': 6.00
+    };
 
-    let itemExistente = this.itens.find(item => item.produto === produto.nome)
+    const precoUnitario = tabelaPrecos[nomeProduto] || 0;
+
+    const itemExistente = this.itens.find(item => item.produto === nomeProduto);
 
     if (itemExistente) {
-      itemExistente.qtd += qtd
-      itemExistente.subtotal += subtotal
+      itemExistente.atualizarQtd(itemExistente.qtd + Number(qtd));
     } else {
-      this.itens.push({
-        produto: produto.nome,
-        qtd: Number(qtd),
-        subtotal: subtotal
-      })
+      const novoItem = new ItemPedido(nomeProduto, qtd, precoUnitario);
+      this.itens.push(novoItem);
     }
 
-    this.calcularTotal()
-    this.notificarObservers()
+    this.calcularTotal();
+    this.notificarObservers();
   }
 
   removerItemEspecifico(nomeProduto) {
