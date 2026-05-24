@@ -15,7 +15,11 @@ const view = new PedidoView();
 const observer = new PedidoObserver(view);
 service.adicionarObserver(observer);
 
-window.adicionar = function () {
+const btnAdicionar = document.getElementById("btnAdicionar");
+const btnRemover = document.getElementById("btnRemover");
+const btnFinalizar = document.getElementById("btnFinalizar");
+
+btnAdicionar.addEventListener("click", () => {
   try {
     const produto = document.getElementById("produto").value;
     const qtd = parseInt(document.getElementById("qtd").value);
@@ -24,13 +28,13 @@ window.adicionar = function () {
   } catch (e) {
     alert(e.message);
   }
-};
+});
 
-window.removerUltimo = function () {
+btnRemover.addEventListener("click", () => {
   service.removerUltimo();
-};
+});
 
-window.finalizar = async function () {
+btnFinalizar.addEventListener("click", async () => {
   try {
     const nomeCliente = document.getElementById("nomeCliente").value;
     const numeroCliente = document.getElementById("numeroCliente").value;
@@ -58,4 +62,4 @@ window.finalizar = async function () {
   } catch (e) {
     alert("Erro ao finalizar pedido. Verifique se o JSON Server está rodando.");
   }
-};
+});
