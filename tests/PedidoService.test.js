@@ -1,5 +1,5 @@
-import { Pedido } from "../models/Pedido.js";
-import { PedidoService } from "../services/PedidoService.js";
+import { Pedido } from "../arquiteturanova/src/models/Pedido.js";
+import { PedidoService } from "../arquiteturanova/src/services/PedidoService.js";
 
 const pedido = new Pedido();
 const service = new PedidoService(pedido);

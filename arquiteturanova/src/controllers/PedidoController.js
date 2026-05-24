@@ -3,7 +3,7 @@ import { PedidoService } from "../services/PedidoService.js";
 import { PedidoRepository } from "../repositories/PedidoRepository.js";
 import { PedidoView } from "../views/PedidoView.js";
 import { WhatsAppService } from "../services/WhatsAppService.js";
-import { PedidoObserver } from "../observers/PedidoObserver.js";
+import { PedidoObserver } from "../views/PedidoObserver.js";
 
 const pedidoInstance = new PedidoSingleton();
 const pedido = pedidoInstance.getPedido();
