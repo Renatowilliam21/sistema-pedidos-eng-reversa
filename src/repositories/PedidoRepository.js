@@ -1,9 +1,11 @@
 export class PedidoRepository {
   constructor() {
-    this.url = "http://localhost:3000/pedidos";
+    // Alterado para 127.0.0.1 para evitar o erro ERR_CONNECTION_REFUSED
+    this.url = "http://127.0.0.1:3000/pedidos";
   }
 
   async salvarPedido(pedido, totalFinal) {
+    // Isolando as propriedades puras do objeto para enviar um JSON limpo
     const pedidoParaSalvar = {
       cliente: "Cliente",
       itens: pedido.itens.map(item => ({
@@ -30,6 +32,7 @@ export class PedidoRepository {
 
   async listarPedidos() {
     const resposta = await fetch(this.url);
+
     return resposta.json();
   }
 }

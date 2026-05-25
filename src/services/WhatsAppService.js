@@ -1,3 +1,5 @@
+import { DescontoService } from "./DescontoService.js"
+
 export class WhatsAppService {
   static gerarMensagem(pedido, totalFinal, nomeCliente) {
     let mensagem = `Resumo do Pedido - ${nomeCliente}\n\n`;
@@ -6,7 +8,14 @@ export class WhatsAppService {
       mensagem += `${item.produto.nome} - Qtd: ${item.qtd} - R$ ${item.getSubtotal().toFixed(2)}\n`;
     });
 
-    mensagem += `\nTotal: R$ ${pedido.calcularTotal().toFixed(2)}`;
+    const totalBruto = pedido.calcularTotal() || 0;
+    const valorDesconto = DescontoService.aplicarDesconto(totalBruto) || 0;
+    const taxaEntrega = totalBruto * 0.05;
+
+    mensagem += `\n--------------------------------`;
+    mensagem += `\nTotal Bruto: R$ ${totalBruto.toFixed(2)}`;
+    mensagem += `\nDesconto Aplicado: R$ ${valorDesconto.toFixed(2)}`;
+    mensagem += `\nTaxa de Entrega (5%): R$ ${taxaEntrega.toFixed(2)}`;
     mensagem += `\nTotal final: R$ ${totalFinal.toFixed(2)}`;
 
     return encodeURIComponent(mensagem);

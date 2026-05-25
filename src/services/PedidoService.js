@@ -1,5 +1,5 @@
 import { ItemPedido } from "../models/ItemPedido.js";
-import { ProdutoFactory } from "../factories/ProdutoFactory.js";
+import { ProdutoFactory } from "../models/ProdutoFactory.js";
 import { DescontoService } from "./DescontoService.js";
 
 export class PedidoService {
@@ -37,14 +37,21 @@ export class PedidoService {
     return this.pedido.calcularTotal();
   }
 
-  finalizar() {
-    const total = this.calcularTotal();
+    finalizar() {
+    
+    const totalBruto = this.calcularTotal() || 0;
 
-    const desconto = DescontoService.aplicarDesconto(total);
-    const taxa = total * 0.05; // Exemplo de taxa fixa de 5%
+    
+    const valorDesconto = DescontoService.aplicarDesconto(totalBruto) || 0;
 
-    return total - desconto + taxa;
+    
+    const taxa = totalBruto * 0.05;
+
+    this.pedido.desconto = valorDesconto;
+    return totalBruto - valorDesconto + taxa;
+
   }
+
 
   limpar() {
     this.pedido.limpar();

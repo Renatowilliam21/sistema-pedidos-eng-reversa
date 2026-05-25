@@ -6,38 +6,77 @@
         {
           "produto": "pastel",
           "preco": 5,
-          "quantidade": 6,
-          "subtotal": 30
-        }
-      ],
-      "total": 30,
-      "totalFinal": 31.5,
-      "data": "28/04/2026, 11:40:56",
-      "id": "3FkwKDVXybc"
-    },
-    {
-      "cliente": "Cliente",
-      "itens": [
-        {
-          "produto": "caldo",
-          "preco": 7,
-          "quantidade": 6,
-          "subtotal": 42
-        }
-      ],
-      "total": 42,
-      "totalFinal": 44.1,
-      "data": "28/04/2026, 11:41:12",
-      "id": "Sf-wvArKUL0"
-    },
-    {
-      "cliente": "Cliente",
-      "itens": [
-        {
-          "produto": "caldo",
-          "preco": 7,
           "quantidade": 3,
-          "subtotal": 21
+          "subtotal": 15
+        }
+      ],
+      "total": 15,
+      "totalFinal": null,
+      "data": "24/05/2026, 20:41:12",
+      "id": "er0jtd4V22M"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 4,
+          "subtotal": 20
+        },
+        {
+          "produto": "caldo",
+          "preco": 7,
+          "quantidade": 4,
+          "subtotal": 28
+        }
+      ],
+      "total": 48,
+      "totalFinal": null,
+      "data": "24/05/2026, 20:42:52",
+      "id": "pR082b4azSQ"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 4,
+          "subtotal": 20
+        },
+        {
+          "produto": "refrigerante",
+          "preco": 4,
+          "quantidade": 4,
+          "subtotal": 16
+        },
+        {
+          "produto": "suco",
+          "preco": 6,
+          "quantidade": 4,
+          "subtotal": 24
+        },
+        {
+          "produto": "suco",
+          "preco": 6,
+          "quantidade": 4,
+          "subtotal": 24
+        }
+      ],
+      "total": 84,
+      "totalFinal": 88.2,
+      "data": "24/05/2026, 20:46:31",
+      "id": "WbhnyrYJu_0"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 3,
+          "subtotal": 15
         },
         {
           "produto": "caldo",
@@ -46,16 +85,256 @@
           "subtotal": 21
         },
         {
-          "produto": "caldo",
-          "preco": 7,
+          "produto": "refrigerante",
+          "preco": 4,
           "quantidade": 3,
-          "subtotal": 21
+          "subtotal": 12
+        },
+        {
+          "produto": "suco",
+          "preco": 6,
+          "quantidade": 10,
+          "subtotal": 60
         }
       ],
-      "total": 63,
-      "totalFinal": 59.85,
-      "data": "28/04/2026, 11:57:17",
-      "id": "uzXRwwqfpSM"
+      "total": 108,
+      "totalFinal": 113.4,
+      "data": "24/05/2026, 20:57:26",
+      "id": "5VxQMGG2HzM"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 2,
+          "subtotal": 10
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 2,
+          "subtotal": 10
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 2,
+          "subtotal": 10
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 2,
+          "subtotal": 10
+        },
+        {
+          "produto": "caldo",
+          "preco": 7,
+          "quantidade": 2,
+          "subtotal": 14
+        },
+        {
+          "produto": "caldo",
+          "preco": 7,
+          "quantidade": 2,
+          "subtotal": 14
+        },
+        {
+          "produto": "caldo",
+          "preco": 7,
+          "quantidade": 2,
+          "subtotal": 14
+        }
+      ],
+      "total": 82,
+      "totalFinal": 86.1,
+      "data": "24/05/2026, 20:58:26",
+      "id": "_uJqmAX4QME"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 3,
+          "subtotal": 15
+        }
+      ],
+      "total": 15,
+      "totalFinal": 15.75,
+      "data": "24/05/2026, 21:00:10",
+      "id": "41wdnl4mTJY"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 333,
+          "subtotal": 1665
+        }
+      ],
+      "total": 1665,
+      "totalFinal": 1748.25,
+      "data": "24/05/2026, 21:00:29",
+      "id": "GugWKgpbr8k"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 4,
+          "subtotal": 20
+        }
+      ],
+      "total": 20,
+      "totalFinal": 21,
+      "data": "24/05/2026, 21:02:45",
+      "id": "BHyJj8DFKLM"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 55,
+          "subtotal": 275
+        }
+      ],
+      "total": 275,
+      "totalFinal": 288.75,
+      "data": "24/05/2026, 21:05:07",
+      "id": "EApkkB8Y_a4"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 30,
+          "subtotal": 150
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 30,
+          "subtotal": 150
+        }
+      ],
+      "total": 300,
+      "totalFinal": 315,
+      "data": "24/05/2026, 21:08:30",
+      "id": "oyIp6O-vEAo"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 54,
+          "subtotal": 270
+        }
+      ],
+      "total": 270,
+      "totalFinal": 283.5,
+      "data": "24/05/2026, 21:13:35",
+      "id": "3VIegMCnLIw"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 30,
+          "subtotal": 150
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 30,
+          "subtotal": 150
+        }
+      ],
+      "total": 300,
+      "totalFinal": 315,
+      "data": "24/05/2026, 21:14:48",
+      "id": "uMFfkrVy65E"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 55,
+          "subtotal": 275
+        }
+      ],
+      "total": 275,
+      "totalFinal": 288.75,
+      "data": "24/05/2026, 21:15:24",
+      "id": "zdwhWjzfbcs"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 34,
+          "subtotal": 170
+        }
+      ],
+      "total": 170,
+      "totalFinal": 144.5,
+      "data": "24/05/2026, 21:17:27",
+      "id": "0VbtvvzteFM"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 30,
+          "subtotal": 150
+        }
+      ],
+      "total": 150,
+      "totalFinal": 127.5,
+      "data": "24/05/2026, 21:18:02",
+      "id": "Iz9S_8sP4ho"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 10,
+          "subtotal": 50
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 1,
+          "subtotal": 5
+        }
+      ],
+      "total": 55,
+      "totalFinal": 52.25,
+      "data": "24/05/2026, 21:18:57",
+      "id": "HpgLYohVe0Q"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
