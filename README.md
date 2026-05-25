@@ -1,79 +1,46 @@
-# Sistema de Pedidos - Engenharia Reversa
+# 🍴 Sistema de Pedidos - Arquitetura de Sistemas
 
-## 🎓 Disciplina
-Arquitetura de Sistemas  
-**Professor:** Dr. Renato William Rodrigues de Souza  
-**Curso:** Análise e Desenvolvimento de Sistemas  
-**Instituição:** IFCE - Campus Boa Viagem  
+## 📌 Descrição
 
----
+Este projeto é a evolução de um sistema de pedidos simples para uma aplicação estruturada utilizando arquitetura em camadas, padrões de projeto e boas práticas.
 
-## Sobre o Projeto
-
-Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
-
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
+O sistema permite:
+- adicionar itens
+- calcular total
+- aplicar regras de negócio
+- salvar pedidos em um backend fake
+- enviar pedidos via WhatsApp
 
 ---
 
-## Objetivo da Atividade
+## 🏗️ Arquitetura do Sistema
 
-O objetivo é aplicar conceitos de:
+O sistema foi organizado em camadas:
 
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
-
----
-
-## Desafio
-
-Você deverá:
-
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
+- Models → entidades (Produto, ItemPedido, Pedido)
+- Services → regras de negócio
+- Controllers → controle das ações
+- Repositories → persistência (JSON Server)
+- Views → interface
 
 ---
 
-## O que analisar
+## 🧠 Padrões de Projeto
 
-Durante a análise, identifique problemas relacionados a:
-
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
+- Factory → criação de produtos (`ProdutoFactory`)
+- Singleton → instância única do pedido (`PedidoSingleton`)
+- Repository → persistência de dados (`PedidoRepository`)
+- Observer → atualização automática da interface
 
 ---
 
-## Implementações obrigatórias
+## 📡 Integrações
 
-Você deve aplicar no sistema:
+### JSON Server
 
-### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
+Backend fake para salvar pedidos.
 
-### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
-
----
-
-## Como executar o projeto
-
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
-
----
-
-## 💻 Como clonar o repositório
+Rodar:
 
 ```bash
-git clone LINK_DO_REPOSITORIO
+npm run server

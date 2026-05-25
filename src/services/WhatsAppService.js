@@ -1,0 +1,36 @@
+import { DescontoService } from "./DescontoService.js"
+
+export class WhatsAppService {
+  static gerarMensagem(pedido, totalFinal, nomeCliente) {
+    let mensagem = `Resumo do Pedido - ${nomeCliente}\n\n`;
+
+    pedido.itens.forEach(item => {
+      mensagem += `${item.produto.nome} - Qtd: ${item.qtd} - R$ ${item.getSubtotal().toFixed(2)}\n`;
+    });
+
+    const totalBruto = pedido.calcularTotal() || 0;
+    const valorDesconto = DescontoService.aplicarDesconto(totalBruto) || 0;
+    const taxaEntrega = totalBruto * 0.05;
+
+    mensagem += `\n--------------------------------`;
+    mensagem += `\nTotal Bruto: R$ ${totalBruto.toFixed(2)}`;
+    mensagem += `\nDesconto Aplicado: R$ ${valorDesconto.toFixed(2)}`;
+    mensagem += `\nTaxa de Entrega (5%): R$ ${taxaEntrega.toFixed(2)}`;
+    mensagem += `\nTotal final: R$ ${totalFinal.toFixed(2)}`;
+
+    return encodeURIComponent(mensagem);
+  }
+
+  static enviar(numero, pedido, totalFinal, nomeCliente) {
+    const mensagem = this.gerarMensagem(pedido, totalFinal, nomeCliente);
+    window.open(`https://wa.me/${numero}?text=${mensagem}`, "_blank");
+  }
+
+  static enviarParaCliente(numeroCliente, pedido, totalFinal, nomeCliente) {
+    this.enviar(numeroCliente, pedido, totalFinal, nomeCliente);
+  }
+
+  static enviarParaEstabelecimento(pedido, totalFinal, nomeCliente) {
+    this.enviar("5588981416430", pedido, totalFinal, nomeCliente);
+  }
+}
