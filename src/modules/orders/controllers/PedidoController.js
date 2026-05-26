@@ -4,6 +4,7 @@ import { PedidoRepository } from "../repositories/PedidoRepository.js";
 import { PedidoView } from "../views/PedidoView.js";
 import { WhatsAppService } from "../../../shared/services/WhatsAppService.js";
 import { PedidoObserver } from "../views/PedidoObserver.js";
+import { authMiddleware } from "../../../shared/middlewares/authMiddleware.js";
 
 const pedidoInstance = new PedidoSingleton();
 const pedido = pedidoInstance.getPedido();
@@ -20,6 +21,7 @@ const btnRemover = document.getElementById("btnRemover");
 const btnFinalizar = document.getElementById("btnFinalizar");
 
 btnAdicionar.addEventListener("click", () => {
+  authMiddleware(() => {
   try {
     const produto = document.getElementById("produto").value;
     const qtd = parseInt(document.getElementById("qtd").value);
@@ -28,13 +30,17 @@ btnAdicionar.addEventListener("click", () => {
   } catch (e) {
     alert(e.message);
   }
+  });
 });
 
 btnRemover.addEventListener("click", () => {
-  service.removerUltimo();
+  authMiddleware(() => {
+    service.removerUltimo();
+  });
 });
 
 btnFinalizar.addEventListener("click", async () => {
+  authMiddleware(async () => {
   try {
     const nomeCliente = document.getElementById("nomeCliente").value;
     const numeroCliente = document.getElementById("numeroCliente").value;
@@ -63,4 +69,5 @@ btnFinalizar.addEventListener("click", async () => {
     alert("Erro ao finalizar pedido. Verifique se o JSON Server está rodando.");
     console.error(e);
   }
+  });
 });
