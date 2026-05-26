@@ -1,4 +1,4 @@
-import { Produto } from "../models/Produto.js";
+import { Produto } from "../entities/Produto.js";
 
 export class ProdutoFactory {
   static criarProduto(nome) {
