@@ -1,4 +1,4 @@
-import { DescontoService } from "../modules/orders/services/DescontoService.js"
+import { DescontoService } from "../../modules/orders/services/DescontoService.js"
 
 export class WhatsAppService {
   static gerarMensagem(pedido, totalFinal, nomeCliente) {
