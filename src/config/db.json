@@ -335,6 +335,33 @@
       "totalFinal": 52.25,
       "data": "24/05/2026, 21:18:57",
       "id": "HpgLYohVe0Q"
+    },
+    {
+      "cliente": "Cliente",
+      "itens": [
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 10,
+          "subtotal": 50
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 10,
+          "subtotal": 50
+        },
+        {
+          "produto": "pastel",
+          "preco": 5,
+          "quantidade": 10,
+          "subtotal": 50
+        }
+      ],
+      "total": 150,
+      "totalFinal": 127.5,
+      "data": "26/05/2026, 01:12:25",
+      "id": "WxN18sS1ztc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

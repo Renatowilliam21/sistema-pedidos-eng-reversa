@@ -1,9 +1,9 @@
-import { PedidoSingleton } from "../../../services/PedidoSingleton.js";
+import { PedidoSingleton } from "../services/PedidoSingleton.js";
 import { PedidoService } from "../services/PedidoService.js";
 import { PedidoRepository } from "../repositories/PedidoRepository.js";
-import { PedidoView } from "../../../views/PedidoView.js";
-import { WhatsAppService } from "../../../services/WhatsAppService.js";
-import { PedidoObserver } from "../../../views/PedidoObserver.js";
+import { PedidoView } from "../views/PedidoView.js";
+import { WhatsAppService } from "../../../shared/services/WhatsAppService.js";
+import { PedidoObserver } from "../views/PedidoObserver.js";
 
 const pedidoInstance = new PedidoSingleton();
 const pedido = pedidoInstance.getPedido();

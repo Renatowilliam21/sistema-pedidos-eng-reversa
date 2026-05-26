@@ -29,7 +29,7 @@
     "type-fest": "^5.6.0"
   },
   "scripts": {
-    "start": "json-server --watch db.json --port 3000",
+    "start": "json-server --watch ./src/config/db.json --port 3000",
     "test": "node PedidoService.test.js"
   },
   "repository": {

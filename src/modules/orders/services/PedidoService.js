@@ -1,6 +1,6 @@
-import { ItemPedido } from "../../../models/ItemPedido.js";
-import { ProdutoFactory } from "../models/ProdutoFactory.js";
-import { DescontoService } from "./DescontoService.js";
+import { ItemPedido } from "../entities/ItemPedido.js";
+import { ProdutoFactory } from "../../products/services/ProdutoFactory.js";
+import { DescontoService } from "../services/DescontoService.js";
 
 export class PedidoService {
   constructor(pedido) {
