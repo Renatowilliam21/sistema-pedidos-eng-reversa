@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Pastelaria do Zé</title>
+  <title>Pastelaria do Zé - Arquitetura Limpa</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,16 +12,15 @@
 
   <div class="form">
     <select id="produto">
-      <option value="pastel">Pastel</option>
-      <option value="caldo">Caldo</option>
-      <option value="refrigerante">Refrigerante</option>
-      <option value="suco">Suco</option>
+      <option value="pastel">Pastel - R$ 5,00</option>
+      <option value="caldo">Caldo - R$ 7,00</option>
+      <option value="refrigerante">Refrigerante - R$ 4,00</option>
+      <option value="suco">Suco - R$ 6,00</option>
     </select>
-
-    <input type="number" id="qtd" placeholder="Quantidade">
-
-    <button onclick="adicionar()">Adicionar</button>
-    <button onclick="finalizar()">Finalizar Pedido</button>
+    <input type="number" id="qtd" placeholder="Quantidade" min="1">
+    
+    <button id="btn-adicionar">Adicionar</button>
+    <button id="btn-finalizar">Finalizar Pedido</button>
   </div>
 
   <div class="lista">
@@ -30,11 +29,14 @@
   </div>
 
   <div class="total">
-    <h2>Total: R$ <span id="total">0</span></h2>
+    <h2>Total: R$ <span id="total">0.00</span></h2>
   </div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="./src/controllers/app.js"></script>
+
+<!-- para testar no console do navegador descomente -->
+<script type="module" src="./src/testes.js"></script>
 
 </body>
 </html>
