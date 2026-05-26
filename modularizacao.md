@@ -51,7 +51,6 @@ A árvore de diretórios do diretório `/src` foi reestruturada para suportar o 
 
 ## A. Diagrama de Módulos e Comunicação
 
-```mermaid
 graph TB
 
     subgraph Shared [Módulo Shared / Transversal]
@@ -104,46 +103,3 @@ graph TB
     Service -->|Solicita persistência ao| Repo
 
     Repo -->|Lê / Escreve em| DB
-sequenceDiagram
-    autonumber
-
-    actor U as Utilizador (Navegador)
-
-    participant MW as shared/authMiddleware
-    participant CTRL as orders/PedidoController
-    participant SRV as orders/PedidoService
-    participant REPO as orders/PedidoRepository
-    participant DB as config/db.json
-
-    U->>MW: Dispara ação (Request / Clique no botão)
-
-    alt Sem token no localStorage
-        MW-->>U: Erro 401 - Não autorizado
-
-    else Token válido encontrado
-
-        MW->>CTRL: Autoriza execução (nextAction)
-        activate CTRL
-
-        CTRL->>SRV: Solicita processamento do pedido
-        activate SRV
-
-        Note over SRV: Aplica descontos e calcula totais
-
-        SRV->>REPO: Solicita persistência do pedido
-        activate REPO
-
-        REPO->>DB: Grava dados assincronamente
-
-        DB-->>REPO: Confirma escrita
-
-        REPO-->>SRV: Retorna sucesso do salvamento
-        deactivate REPO
-
-        SRV-->>CTRL: Retorna pedido finalizado
-        deactivate SRV
-
-        CTRL-->>U: Atualiza interface e exibe sucesso
-        deactivate CTRL
-
-    end
