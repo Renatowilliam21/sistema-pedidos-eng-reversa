@@ -1,4 +1,4 @@
-import { Pedido } from "../models/Pedido.js";
+import { Pedido } from "../entities/Pedido.js";
 
 export class PedidoSingleton {
   constructor() {

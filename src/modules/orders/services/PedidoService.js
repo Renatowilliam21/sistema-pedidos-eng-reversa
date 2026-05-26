@@ -1,4 +1,4 @@
-import { ItemPedido } from "../models/ItemPedido.js";
+import { ItemPedido } from "../../../models/ItemPedido.js";
 import { ProdutoFactory } from "../models/ProdutoFactory.js";
 import { DescontoService } from "./DescontoService.js";
 
