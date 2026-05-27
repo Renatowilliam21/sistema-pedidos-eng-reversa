@@ -1,79 +1,25 @@
-# Sistema de Pedidos - Engenharia Reversa
+# Atividade 3 - Arquitetura de Sistemas - Engenharia Reversa
 
-## 🎓 Disciplina
-Arquitetura de Sistemas  
-**Professor:** Dr. Renato William Rodrigues de Souza  
-**Curso:** Análise e Desenvolvimento de Sistemas  
-**Instituição:** IFCE - Campus Boa Viagem  
-
----
-
-## Sobre o Projeto
-
-Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
-
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
+## Informações do Projeto
+* **Aluno:** Halef (S3)
+* **Curso:** ADS
+* **Disciplina:** Arquitetura de Sistemas
+* **Orientador:** Dr. Renato William Rodrigues de Souza
+* **Instituição:** IFCE - Campus Boa Viagem
 
 ---
 
-## Objetivo da Atividade
+## Descrição do Projeto
+Análise arquitetural por engenharia reversa do sistema de delivery em produção da plataforma: **[Tropykaly Pizzas e Lanches](https://tropykalypizzaselanches.com.br/)**. 
 
-O objetivo é aplicar conceitos de:
-
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
+O escopo avalia a qualidade de design de software (Coesão, Acoplamento, SoC), identifica padrões arquiteturais (MVC, Camadas, Monolito) e propõe correções de débito técnico fundamentadas em diagramação UML e padrões de projeto (GoF).
 
 ---
 
-## Desafio
+## Estrutura do Repositório
 
-Você deverá:
-
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
-
----
-
-## O que analisar
-
-Durante a análise, identifique problemas relacionados a:
-
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
-
----
-
-## Implementações obrigatórias
-
-Você deve aplicar no sistema:
-
-### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
-
-### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
-
----
-
-## Como executar o projeto
-
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
-
----
-
-## 💻 Como clonar o repositório
-
-```bash
-git clone LINK_DO_REPOSITORIO
+* **`analise.md`**: Mapeamento de requisitos funcionais, fluxos de navegação e diagnóstico técnico de acoplamento e coesão da aplicação.
+* **`arquitetura.md`**: Abstração do domínio em classes, atribuição de responsabilidades e especificação de relacionamentos/multiplicidades UML.
+* **`comparacao.md`**: Análise comparativa entre o sistema real e o modelo idealizado em ambiente didático, abordando a viabilidade de padrões de projeto (Factory e Singleton).
+* **`melhorias.md`**: Relatório de problemas estruturais identificados, propostas de refatoração arquitetural e reflexão crítica sobre engenharia de software.
+* **`modelagem.png`**: Diagrama de Classes UML estrutural resultante da engenharia reversa do sistema.
