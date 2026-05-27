@@ -1,7 +1,7 @@
 export class ItemPedido {
     constructor(produto, quantidade) {
-        this.produto = produto;
-        this.quantidade = quantidade;
+        this.produto = produto; 
+        this.quantidade = parseInt(quantidade, 10);
     }
 
     get subtotal() {

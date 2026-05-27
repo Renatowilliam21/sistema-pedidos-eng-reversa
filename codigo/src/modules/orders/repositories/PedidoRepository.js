@@ -1,8 +1,6 @@
 class PedidoRepository {
     constructor() {
-        if (PedidoRepository.instance) {
-            return PedidoRepository.instance;
-        }
+        if (PedidoRepository.instance) return PedidoRepository.instance;
         this.apiUrl = 'http://localhost:3000/pedidos';
         PedidoRepository.instance = this;
     }
@@ -16,11 +14,9 @@ class PedidoRepository {
             });
             return await response.json();
         } catch (error) {
-            console.warn("JSON Server não está rodando. Simulando sucesso no console.");
-            console.log("Pedido salvo:", pedido);
+            console.warn("[MÓDULO ORDERS - REPO]: JSON Server offline. Simulando sucesso.");
+            return pedido;
         }
     }
 }
-
-// Exporta uma instância única (Singleton)
 export default new PedidoRepository();
