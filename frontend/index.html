@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Tropykaly - Sistema de Pedidos</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <h1>🍕 Tropykaly</h1>
+    <span>Pizzas e Lanches</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="card form-card">
+    <h2>Fazer Pedido</h2>
+    <div class="form">
+      <select id="produto">
+        <option value="pizza">🍕 Pizza</option>
+        <option value="lanche">🍔 Lanche</option>
+        <option value="bebida">🥤 Bebida</option>
+      </select>
+      <input type="number" id="qtd" placeholder="Quantidade" min="1">
+      <button onclick="adicionar()">➕ Adicionar</button>
+    </div>
+  </div>
+
+  <div class="card lista-card">
+    <h2>Itens do Pedido</h2>
+    <ul id="lista"></ul>
+  </div>
+
+  <div class="card total-card">
+    <div class="total-linha">
+      <span>Subtotal</span>
+      <span>R$ <strong id="total">0</strong></span>
+    </div>
+    <div class="total-linha">
+      <span>Taxa de entrega</span>
+      <span>R$ <strong id="taxa">5</strong></span>
+    </div>
+    <div class="total-linha total-final">
+      <span>Total</span>
+      <span>R$ <strong id="totalFinal">5</strong></span>
+    </div>
+    <div class="botoes">
+      <button class="btn-finalizar" onclick="finalizar()">✅ Finalizar Pedido</button>
+      <button class="btn-whatsapp" onclick="enviarWhatsApp()">📲 Enviar WhatsApp</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2024 Tropykaly Pizzas e Lanches — Boa Viagem, CE</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,79 +1,129 @@
-# Sistema de Pedidos - Engenharia Reversa
+# Tropykaly - Sistema de Pedidos
 
-## 🎓 Disciplina
-Arquitetura de Sistemas  
-**Professor:** Dr. Renato William Rodrigues de Souza  
-**Curso:** Análise e Desenvolvimento de Sistemas  
-**Instituição:** IFCE - Campus Boa Viagem  
+Projeto desenvolvido para a disciplina de Arquitetura de Sistemas (IFCE - Campus Boa Viagem).
 
 ---
 
-## Sobre o Projeto
+## Objetivo
 
-Este projeto consiste em um sistema de pedidos simples desenvolvido em HTML, CSS e JavaScript.
+O sistema tem como objetivo gerenciar pedidos da pizzaria Tropykaly, permitindo a navegação por categorias de produtos (Pizzas, Lanches, Bebidas), cálculo automático de valores com taxa de entrega e finalização do pedido.
 
- **Importante:**  
-O sistema foi propositalmente desenvolvido com problemas de organização, design e arquitetura.
-
----
-
-## Objetivo da Atividade
-
-O objetivo é aplicar conceitos de:
-
-- Arquitetura de Software  
-- Design de Software  
-- Engenharia Reversa  
-- Padrões de Projeto (Factory e Singleton)  
-- Versionamento com Git  
+O projeto foi evoluído a partir de uma implementação simples em JavaScript para uma arquitetura em camadas com backend em PHP, aplicando padrões de projeto e separação de responsabilidades.
 
 ---
 
-## Desafio
+## Tecnologias Utilizadas
 
-Você deverá:
-
-1. Analisar o sistema existente  
-2. Identificar problemas estruturais  
-3. Propor melhorias  
-4. Refatorar o código  
-5. Aplicar padrões de projeto  
-6. Utilizar Git corretamente durante o processo  
+- HTML, CSS, JavaScript (Frontend)
+- PHP (Backend / API)
+- Sessão PHP (persistência de dados)
+- Render (deploy)
 
 ---
 
-## O que analisar
+## Arquitetura do Sistema
 
-Durante a análise, identifique problemas relacionados a:
+O sistema foi reorganizado seguindo uma arquitetura em camadas:
 
-- Baixa coesão  
-- Alto acoplamento  
-- Falta de separação de responsabilidades  
-- Duplicação de código  
-- Organização do sistema  
+- **Models** → Entidades do sistema (Produto, Pedido, ItemPedido)
+- **Controllers** → Controle da API e fluxo da aplicação
+- **Services** → Regras de negócio e padrões de projeto
+- **Repositories** → Persistência dos dados
+- **Frontend** → Interface web consumindo a API via fetch
+
+O frontend se comunica com o backend por meio de requisições HTTP (API PHP centralizada).
 
 ---
 
-## Implementações obrigatórias
+## Evolução do Sistema (Engenharia Reversa)
 
-Você deve aplicar no sistema:
+### Versão inicial (legado)
+- Lógica concentrada em JavaScript
+- Manipulação direta do DOM
+- Uso de estruturas globais
+- Ausência de backend
+
+### Versão atual (refatorada)
+- Backend em PHP estruturado em camadas
+- Separação entre frontend e backend
+- Uso de padrões de projeto
+- Persistência de dados via sessão PHP
+- Comunicação via API
+- Taxa de entrega calculada automaticamente
+
+---
+
+## Padrões de Projeto Aplicados
 
 ### Factory
-Utilizar para criação de objetos (ex: produtos, pedidos)
+Responsável pela criação centralizada de objetos Produto (Pizza, Lanche, Bebida).
 
 ### Singleton
-Utilizar para garantir uma única instância (ex: controle do pedido ou persistência)
+Garante uma única instância do Pedido durante a execução da aplicação, persistida via sessão PHP.
+
+### Strategy
+Define a lógica de aplicação de descontos progressivos no pedido.
+
+### Observer
+Implementado com Subject e LoggerObserver para registrar eventos ao finalizar pedidos.
+
+### Repository
+Responsável pela persistência e manipulação dos dados armazenados.
 
 ---
 
-## Como executar o projeto
+## Funcionalidades
 
-1. Baixe ou clone o repositório  
-2. Abra o arquivo `index.html` no navegador  
+- Adicionar produtos ao pedido (Pizza, Lanche, Bebida)
+- Listar itens adicionados
+- Calcular subtotal automaticamente
+- Calcular taxa de entrega (R$ 5,00)
+- Aplicar desconto progressivo na finalização
+- Finalizar pedido
+- Enviar resumo do pedido via WhatsApp
+- Persistência de dados via sessão PHP
 
 ---
 
-## 💻 Como clonar o repositório
+## API (Backend PHP)
 
-```bash
-git clone LINK_DO_REPOSITORIO
+O backend utiliza um endpoint único controlado por parâmetro `action`:
+
+- `GET ?action=listar` → retorna itens do pedido
+- `POST ?action=adicionar` → adiciona item ao pedido
+- `GET ?action=finalizar` → finaliza o pedido
+
+---
+
+## Estrutura do Projeto
+
+backend/
+  controllers/
+  models/
+  services/
+  repositories/
+
+index.html
+script.js
+style.css
+
+---
+
+## Observações Técnicas
+
+- O sistema foi adaptado para funcionar em ambiente de deploy (Render)
+- Comunicação frontend/backend via fetch API
+- Estrutura modular para facilitar manutenção e expansão
+- Aplicação de conceitos de engenharia de software (coesão e baixo acoplamento)
+
+---
+
+## Autor
+
+Projeto acadêmico – IFCE Boa Viagem
+
+---
+
+## Conclusão
+
+O sistema evoluiu de uma aplicação monolítica em JavaScript para uma arquitetura em camadas baseada em PHP, aplicando padrões de projeto e boas práticas de engenharia de software, melhorando significativamente a organização, escalabilidade e manutenção do código.
